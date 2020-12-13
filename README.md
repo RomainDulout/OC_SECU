@@ -1,4 +1,9 @@
-# TP : Introduction à la sécurité dans l'IoT
+# TP : Introduction à la sécurité dans l'Internet des Objets (IoT)
+
+Le but de ce TP est de nous offrir une petite introduction à la sécurité dans l'environnement IoT.
+
+**Note : A la fin de la scéance, pensez à m'envoyer un compte-rendu (court) répondant aux différentes questions présentes dans ce TP (leo.mendiboure@univ-eiffel.fr)**
+
 
 ## 1. Petit retour sur les objets connectés
 
@@ -14,7 +19,20 @@ Bien que ces objets connectés soient généralements associés à des gadgets d
 - détournement de l'utilisation d'objets connectés : Botnets (DDoS, Spam, etc.)
 
 
+**Q.1** Rappelez quels sont les éléments présents dans l'architecture IoT. Déduisez-en à quel niveau peuvent se produire les attaques contre cette architecture.  
 
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://iot-analytics.com/understanding-iot-security-part-1-iot-security-architecture/
+
+**Q.2** Expliquez rapidement ce qu'est l'OWASP et indiquez quelles sont les 10 principales vulnérabilités identifiées pour l'environnement IoT.
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10
+
+Dans la suite de ce TP (par manque de temps), nous nous focaliserons sur trois principaux types d'attaques : 
+- les attaques réseau (au travers d'une mise en pratique) ;
+- les attaques logicielles (au travers d'une mise en pratique) ;
+- les attaques par canaux auxiliaires (au travers d'une analyse théorique).
+
+Il est à noter que les mises en pratique proposées dans les sections **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique.
 
 
 ## 2. Une première mise en pratique : Attaques réseau
@@ -29,9 +47,9 @@ Bien que ces objets connectés soient généralements associés à des gadgets d
 
 ## 5. Pour aller plus loin
 
-Comme cela a déjà été indiqué, les expérimentations proposées dans les section *2* et *3* s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique. 
+Comme cela a déjà été indiqué, les expérimentations proposées dans les section **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). 
 
-Au delà des attaques réseau et logicielles présentées ici, le projet SEED pourrait également vous permettre de vous former à de nombreux autres types d'attaques et de contremesures) : 
-- au niveau du système d'exploitation lui même (embarqué ou non) ;
-- du système de chiffrement ; 
-- des interfaces Web.
+**Q.** Indiquez, au delà des attaques réseau et logicielles, les questions auxquelles vous pourriez vous former grâce à ce projet.
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées par : https://seedsecuritylabs.org/Labs_20.04/ 
+
