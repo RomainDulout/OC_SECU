@@ -42,7 +42,19 @@ Il est à noter que les mises en pratique proposées dans les sections **2** et 
 
 ## 4. Etude théorique : Attaques par canaux auxilaires (*Side-channel attack*)
 
+Dans cette partie, au travers d'une étude théorique, nous allons nous intéresser aux attaques pouvant être menées au niveau de l'objet IoT lui même. Plus particulièrement, nous allons nous intéresser aux attaques par canaux auxiliaires. 
+
+**Q.** Qu'est ce qu'une attaque par canaux auxiliaires ? Que cherche-t-on généralement à deviner ? Quelles valeurs peuvent être mesurées ?
+
+Pour répondre à cette question vous pourrez utiliser les informations présentées par : http://www.bibmath.net/crypto/index.php?action=affiche&quoi=chasseur/canalauxiliaire
+
 ### 4.A Attaque simple par analyse de courant (*Simple Power Analysis*)
+
+Une première attaque par canaux auxiliaires possible, parmi les plus simples, est l'attaque nommée *Simple Power Analysis (SPA)*.
+
+Cette attaque consiste à mesurer directement la consommation d'un circuit électrique. L'objectif de cette attaque (ainsi que des autres attaques présentées dans cette partie **4**) est de deviner la clé privée utilisée par un objet IoT.
+
+Pour comprendre le fonctionnement de cette attaque, nous allons nous focaliser ici sur l'algorithme à clé publique RSA (Rivest–Shamir–Adleman), couramment utilisé dans l'environnement IoT.
 
 ### 4.B Attaque par injection de fautes 
 
