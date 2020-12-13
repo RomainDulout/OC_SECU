@@ -56,6 +56,8 @@ Cette attaque consiste à mesurer directement la consommation d'un circuit élec
 
 Pour comprendre le fonctionnement de cette attaque, nous allons nous focaliser ici sur l'algorithme à clé publique RSA (Rivest–Shamir–Adleman), couramment utilisé dans l'environnement IoT.
 
+https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
+
 ### 4.B Attaque par injection de fautes 
 
 ### 4.C Attaque différentielle par analyse de courant (*Differential Power Analysis*)
