@@ -7,6 +7,13 @@ Si la sécurité des objets connectés apparait aujourd'hui comme un élément e
 2. un manque de ressources : peu de ressources à consacrer à la sécurité (difficile déploiement de solutions cryptographiques, absence de sécurité pour les environnements d'exécution), peu de ressources (stockage, calcul, communication) dans l'absolu...
 3. une manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité)
 
+Bien que ces objets connectés soient généralements associés à des gadgets dans l'imaginaire collectifs, comme l'on montré différentes attaquées passées ou actuelles (Jeep hack, Nest hack, Vtech hack, Mirai), la vulnérabilité de ces objets entraine des risques importants :
+- attaques destructrices : ces attaques, potentiellement à grande échelle (Shodan), peuvent entraîner, par exemple, la déstabilisation de grands groupes industriels voire d'états (concurrents ?)
+- espionnage : captation de données personnelles, détournement de l'usage de capteurs (micros, caméras, etc.)
+- sabotage : perturbation du fonctionnement d'un service (ville intelligente, transport, énergie, etc.)
+- détournement de l'utilisation d'objets connectés : Botnets (DDoS, Spam, etc.)
+
+
 
 
 
