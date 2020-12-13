@@ -27,10 +27,7 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10
 
-Dans la suite de ce TP (par manque de temps), nous nous focaliserons sur trois principaux types d'attaques : 
-- les attaques réseau (au travers d'une mise en pratique) ;
-- les attaques logicielles (au travers d'une mise en pratique) ;
-- les attaques par canaux auxiliaires (au travers d'une analyse théorique).
+Dans la suite de ce TP (par manque de temps), nous nous focaliserons sur les attaques au niveau réseau et au niveau de l'objet IoT lui même (logicielles et physiques).
 
 Il est à noter que les mises en pratique proposées dans les sections **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique.
 
