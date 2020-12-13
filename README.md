@@ -14,4 +14,9 @@
 
 ## 5. Pour aller plus loin
 
-Comme cela a déjà été indiqué, les expérimentations proposées dans les section *2* et *3* s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique. Au délà des attaques réseau et logicielles présentées ici, le projet SEED pourrait également vous permettre de vous former à de nombreux autres types d'attaques, notamment au niveau du système d'exploitation lui même (embarqué ou non), du système de chiffrement et des interfaces Web.
+Comme cela a déjà été indiqué, les expérimentations proposées dans les section *2* et *3* s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique. 
+
+Au delà des attaques réseau et logicielles présentées ici, le projet SEED pourrait également vous permettre de vous former à de nombreux autres types d'attaques et de contremesures) : 
+- au niveau du système d'exploitation lui même (embarqué ou non) ;
+- du système de chiffrement ; 
+- des interfaces Web.
