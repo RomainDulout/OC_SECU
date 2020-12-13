@@ -34,13 +34,19 @@ Il est à noter que les mises en pratique proposées dans les sections **2** et 
 
 ## 2. Une première mise en pratique : Attaques réseau
 
-### 2.A Empoisenement du cache ARP
+### 2.A Empoisonnement du cache ARP
 
 ### 2.B 
 
 ## 3. Une seconde mise en pratique : Attaques logicielles
 
-## 4. Une petite introduction théorique aux attaques par canaux auxilaires
+## 4. Etude théorique : Attaques par canaux auxilaires (*Side-channel attack*)
+
+### 4.A Attaque simple par analyse de courant (*Simple Power Analysis*)
+
+### 4.B Attaque par injection de fautes 
+
+### 4.C Attaque différentielle par analyse de courant (*Differential Power Analysis*)
 
 ## 5. Pour aller plus loin
 
