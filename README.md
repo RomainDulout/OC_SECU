@@ -41,7 +41,9 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 Dans cette partie, nous allons plus particulièrement nous intéresser à deux attaques réseau courantes : les vulnérabilités de DNS et les vulnérabilités du protocole TCP/IP.
 
-### 2.A Vulnérabilités de 1818
+Note : Les VMs Ubuntu utilisées sont de base configurées en anglais. Pour remédier à cela et pouvoir utiliser un clavier Français, on faut vous rendre dans *Systems Parameters* puis *Text entry* puis ajouter la langue française ("*+*" *French*). Vous aurez ensuite la possibilité de changer de langue.
+
+### 2.A Vulnérabilités de DNS
 
 Basiquement, un serveur DNS (*Domain Name System*) permet de réaliser la conversion entre des noms de domaines (URL par exemple) et adresses IP.
 
