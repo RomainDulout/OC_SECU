@@ -1,6 +1,6 @@
 # TP : Introduction à la sécurité dans l'Internet des Objets (IoT)
 
-Le but de ce TP est de nous offrir une petite introduction à la sécurité dans l'environnement IoT.<sub>n</sub>
+Le but de ce TP est de nous offrir une petite introduction à la sécurité dans l'environnement IoT.
 
 **Note : A la fin de la scéance, pensez à m'envoyer un compte-rendu (court) répondant aux différentes questions présentes dans ce TP (leo.mendiboure@univ-eiffel.fr)**
 
@@ -59,7 +59,7 @@ Pour comprendre le fonctionnement de cette attaque, nous allons nous focaliser i
 Avec cet algorithme, la fonction utilisée pour le déchiffrement d'un message est la suivante :
 
 
-M=C^d mod(N)
+**M=C<sup>d</sup> mod(N)**
 
 où *M* correspond au message déchiffré, *C* au message chiffré, *d* à la clé privée de l'objet IoT et *N* à la multiplication de deux entiers premiers.
 
