@@ -139,7 +139,21 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 
 
-### 4.C Attaque différentielle par analyse de courant (*Differential Power Analysis*)
+### 4.C Ouverture : Attaque différentielle par analyse de courant (*Differential Power Analysis*)
+
+Alors que les attaques SPA et par injection de fautes font partie des attaques "simples", pouvant être exécutées dans un environnement peu protégé (ce qui correspond à bon nombre d'objets IoT), les attaques DPA font partie d'attaques plus complexes pouvait être exécutées contre des systèmes mieux protégés.
+
+L'attaque DPA part de l'idée que la consommation de puissance est différente selon les états (bit à 0 ou 1) et les transitions (1->0 ou 0->1).
+
+Toutefois, ces variations sont infinitésimales et peuvent être cachées par l'existence de bruit ou une erreur de mesure.
+
+Par conséquent, l'approche DPA repose également sur une analyse statistique : l'attaquant va répéter plusieurs fois (1000, 10000) une même opération afin d'en déduire des tendances.
+
+Ainsi, grâce à cette approche, l'attaquant pourra être en mesure (après un certain temps...) d'associer la mesure d'un instant donné à un état (ou une transition) et par conséquent d'en déduire la clé privée de l'objet IoT. 
+
+Cette attaque, basée sur des variations très petites, et non liée à une erreur dans l'implémentation de l'algorithme de chiffrement, est bien plus puissance que les attaques SPA et d'injections de fautes. Toutefois, des contremesures sont possibles.
+
+**Q.** Quelles contremesures pourraient être proposées contre ce genre d'attaques ?
 
 ## 5. Pour aller plus loin
 
