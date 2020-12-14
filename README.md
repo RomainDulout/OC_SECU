@@ -67,12 +67,24 @@ Ainsi, l'objectif d'un attaquant serait ici de déterminer la valeur de *d*.
 
 Or, avec RSA, la méthode la plus efficace pour calculer l'exponentiation d'un entier par un autre est la méthode dite d'exponentiation rapide :
 
-```
-Objectif, calculer d :
+_____
+*Objectif, calculer d :*
 
-1. Calcul de la décomposition binaire de d
-d=d<sub>n</sub>d<sub>n-1</sub>...d<sub>1</sub>d<sub>0</sub><sup>2</sup>
-```
+*1. Calcul de T, la décomposition binaire de d*
+*d=d<sub>n</sub>d<sub>n-1</sub>...d<sub>1</sub>d<sub>0</sub><sup>2</sup>*
+*2. Définir la valeur du résultat T*
+*T <- C*
+*3. Calculer l'exponentiation*
+*Pour i allant de n-1 à 0:*
+*   si d<sub>i</sup>=0:*
+*       T <- T x T (carré)*
+*   si d<sub>i</sub>=1:*
+*       T <- T x T (carré)*
+*       T <- T x C (multipication)*
+*4. renvoyer T*
+____
+
+
 
 **Q.**
 
