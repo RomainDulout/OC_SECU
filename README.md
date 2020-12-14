@@ -39,11 +39,38 @@ Les attaques réseau sont une première grande catégorie d'attaques qui peuvent
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://blog.f-secure.com/fr/les-5-phases-dune-cyber-attaque-le-point-de-vue-du-pirate/
 
-Dans cette partie, nous allons plus particulièrement nous intéresser à deux attaques réseau courantes : l'empoisonnement de cache ARP et les vulnérabilités du protocole TCP/IP.
+Dans cette partie, nous allons plus particulièrement nous intéresser à deux attaques réseau courantes : les vulnérabilités de DNS et les vulnérabilités du protocole TCP/IP.
 
-### 2.A Empoisonnement du cache ARP
+### 2.A Vulnérabilités de 1818
 
+Basiquement, un serveur DNS (*Domain Name System*) permet de réaliser la conversion entre des noms de domaines (URL par exemple) et adresses IP.
 
+Dans cette partie, après avoir lancé un serveur SDN, nous allons essayer de voir comment un attaquant pourrait modifier le comportement de ce serveur et rediriger les utilisateurs vers des destinations non voulues et potentiellement malicieuses.
+
+#### Mise en place de l'environnement
+
+Pour pouvoir mener à bien cette partie, il va tout d'abord être nécessaire de mettre en place l'environnement.
+
+On va ici considérer 3 machines :
+
+   Utilisateur       ------------------     Attaquant    ---------------   Server DNS
+(IP : 10.0.2.18)                          (IP : 10.0.2.17)               (IP : 10.0.2.16)
+
+Sur VirtualBox, il va donc falloir lancer 3 VM Ubuntu différentes, en définissant leurs IPs et en indiquant dans les préférences réseau "NAT Network".
+
+Ensuite, il va falloir configurer la machine de l'utilisateur :
+
+1. Indiquez dans le fichier */etc/resolvconf/resolv.conf.d/head* l'adresse du serveur DNS :
+
+        *nameserver 10.0.2.16*
+
+2. Rechargez la configuration afin qu'elle prenne en compte cette modification :
+
+        *sudo resolvconf -u*
+        
+3. En utilisant la commande *dig google.fr*, vérifiez que cela a bien fonctionné.
+
+Dans un troisième temps, il va falloir mettre en place le serveur DNS local (machine serveur DNS)
 
 **Q.** Contremesures
 
