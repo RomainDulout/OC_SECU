@@ -58,9 +58,9 @@ Pour comprendre le fonctionnement de cette attaque, nous allons nous focaliser i
 
 Avec cet algorithme, la fonction utilisée pour le déchiffrement d'un message est la suivante :
 
-```
+
 M=C^d mod(N)
-```
+
 où *M* correspond au message déchiffré, *C* au message chiffré, *d* à la clé privée de l'objet IoT et *N* à la multiplication de deux entiers premiers.
 
 Ainsi, l'objectif d'un attaquant serait ici de déterminer la valeur de *d*.
