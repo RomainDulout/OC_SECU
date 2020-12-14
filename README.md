@@ -56,6 +56,26 @@ Cette attaque consiste à mesurer directement la consommation d'un circuit élec
 
 Pour comprendre le fonctionnement de cette attaque, nous allons nous focaliser ici sur l'algorithme à clé publique RSA (Rivest–Shamir–Adleman), couramment utilisé dans l'environnement IoT.
 
+Avec cet algorithme, la fonction utilisée pour le déchiffrement d'un message est la suivante :
+
+```
+M=C<sup>d</sup> mod(N)
+```
+où *M* correspond au message déchiffré, *C* au message chiffré, *d* à la clé privée de l'objet IoT et *N* à la multiplication de deux entiers premiers.
+
+Ainsi, l'objectif d'un attaquant serait ici de déterminer la valeur de *d*.
+
+Or, avec RSA, la méthode la plus efficace pour calculer l'exponentiation d'un entier par un autre est la méthode dite d'exponentiation rapide :
+
+```
+Objectif, calculer d :
+
+1. Calcul de la décomposition binaire de d
+d=d<sub>n</sub>d<sub>n-1</sub>...d<sub>1</sub>d<sub>0</sub><sup>2</sup>
+```
+
+**Q.**
+
 https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
 
 ### 4.B Attaque par injection de fautes 
