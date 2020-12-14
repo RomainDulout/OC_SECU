@@ -94,11 +94,11 @@ Pour i allant de n-1 à 0:
 4) renvoyer T
 ____
 
+**Q.** Si vous étiez un attaquant, en considérant l'algorithme ci-dessus, comment pourriez vous être en capacité de deviner la clé de l'objet IoT ?
 
+Pour répondre à cette question, vous pourrez utiliser les informations présentées aux slides 25 et 26 dans https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
 
-**Q.**
-
-https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
+**Q.** Pour éviter ce problème et offrir une solution "à consommation constante", que le bit traité soit un 0 ou un 1, quelle contremesure pourriez vous proposer ?
 
 ### 4.B Attaque par injection de fautes 
 
