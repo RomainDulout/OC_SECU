@@ -70,15 +70,15 @@ Or, avec RSA, la méthode la plus efficace pour calculer l'exponentiation d'un e
 _____
 **Objectif, calculer d :**
 
-1. Calcul de T, la décomposition binaire de d
+1) Calcul de T, la décomposition binaire de d
 
 d=d<sub>n</sub>d<sub>n-1</sub>...d<sub>1</sub>d<sub>0</sub><sup>2</sup>
 
-2. Définir la valeur du résultat T
+2) Définir la valeur du résultat T
 
 T <- C
     
-3. Calculer l'exponentiation
+3) Calculer l'exponentiation
   
 Pour i allant de n-1 à 0:
   si d<sub>i</sub>=0:
@@ -91,7 +91,7 @@ Pour i allant de n-1 à 0:
         
    T <- T x C (multipication)
 
-4. renvoyer T
+4) renvoyer T
 ____
 
 
