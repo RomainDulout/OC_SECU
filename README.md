@@ -4,7 +4,6 @@ Le but de ce TP est de nous offrir une petite introduction à la sécurité dans
 
 **Note : A la fin de la scéance, pensez à m'envoyer un compte-rendu (court) répondant aux différentes questions présentes dans ce TP (leo.mendiboure@univ-eiffel.fr)**
 
-
 ## 1. Petit retour sur les objets connectés
 
 Si la sécurité des objets connectés apparait aujourd'hui comme un élément essentiel, c'est tout d'abord parce plusieurs centaines de millions d'objets circulent aujourd'hui et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. C'est ensuite parce que ces objets rencontrent différents problèmes de sécurité :
@@ -34,10 +33,24 @@ Il est à noter que les mises en pratique proposées dans les sections **2** et 
 
 ## 2. Une première mise en pratique : Attaques réseau
 
+Les attaques réseau sont une première grande catégorie d'attaques qui peuvent être menées contre les objets IoT.
+
+**Q.** Ces attaques se décomposent généralement en 4 à 5 grandes étapes, lesquelles ?
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://blog.f-secure.com/fr/les-5-phases-dune-cyber-attaque-le-point-de-vue-du-pirate/
+
+Dans cette partie, nous allons plus particulièrement nous intéresser à deux attaques réseau courantes : l'empoisonnement de cache ARP et les vulnérabilités du protocole TCP/IP.
+
 ### 2.A Empoisonnement du cache ARP
 
-### 2.B 
 
+
+**Q.** Contremesures
+
+### 2.B Vulnérabilités du protocole TCP/IP
+
+
+**Q.** Contremesures
 ## 3. Une seconde mise en pratique : Attaques logicielles
 
 ## 4. Etude théorique : Attaques par canaux auxilaires (*Side-channel attack*)
