@@ -102,6 +102,43 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 ### 4.B Attaque par injection de fautes 
 
+Une contremesure que vous pourriez avoir introduit dans la partie précédente pourrait consister à introduire une opération factice lorsque le bit est 0 à :
+
+_____
+  si d<sub>i</sub>=0:
+  
+   T <- T x T (carré)
+   
+   U <- T x C (multiplication)
+      
+  si d<sub>i</sub>=1:
+        
+   T <- T x T (carré)
+        
+   T <- T x C (multipication)
+_____
+
+Ainsi, grâce à cette approche, la solution garantit une consommation énergétique constante (que le bit soit à 1 ou 0) sans impacter le résultat final, rendant l'attaque SPA impossible.
+
+Toutefois, cette solution est imparfaite. En effet, elle pourrait être sensible aux attaques dites d'injection de fautes.
+
+Ces attaques consistent à perturber le fonctionnement du système durant l'exécution de l'algorithme de chiffrement : sur tension, surchauffe, etc. 
+
+Ainsi, si l'attaquant introduit des fautes au moment du calcul de l'exponentiation, il pourra être en mesure de déterminer si des opérations sont factices ou non :
+
+- si l'attaquant perturbe le fonctionnement du système au moment d'une opération factice (multiplication dans le cas où le bit est à 0), le résultat final ne sera pas perturbé par cette attaque. Ainsi, le message sera correctement déchiffré ;
+
+- si l'attaquant perturbe le fonctionnement du système au moment d'une opération non factice (multiplication dans le cas où le bit est à 1), le résultat final sera directement impacté par cette attaque. Ainsi, le message sera déchiffré de façon incorrecte.
+
+Par conséquent, cette attaque par injection de fautes, permet d'attaquer un système protégé uniquement contre les attaques SPA et de déterminer la valeur de la clé privée de l'objet IoT.
+
+**Q.** Quelle contremesure pourrait être proposée pour résoudre ce problème ?
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées au slide 37 dans https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
+
+
+
+
 ### 4.C Attaque différentielle par analyse de courant (*Differential Power Analysis*)
 
 ## 5. Pour aller plus loin
