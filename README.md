@@ -128,6 +128,8 @@ gcc -z execstack -o call_shellcode call_shellcode.c
 
 ### Tâche 2 : Découverte du programme vulnérable
 
+
+
 **Q. Contremesures**
 
 
