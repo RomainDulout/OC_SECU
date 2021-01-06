@@ -128,6 +128,19 @@ gcc -z execstack -o call_shellcode call_shellcode.c
 
 ### Tâche 2 : Découverte du programme vulnérable
 
+Le programme vulnérable, présent dans le dossier *Part3*, est nommé *stack.c*.
+
+**Q.** En analysant la fonction *bof*, expliquez pourquoi ce programme est vulnérable aux attaques par débordement de mémoire.
+
+Nous allons maintenant compiler ce programme. Pour ce faire, il nous faut suivre les étapes suivantes :
+1. Lancer la commande permettant de compiler le programme `gcc -o stack -z execstack -fno-stack-protector stack.c`
+2. Transformer l'exécutable en un programme root : `sudo chown root stack` puis `sudo chmod 4755 stack`
+
+### Tâche 3 : Exploitation de la vulnérabilité
+
+Comme vous avez pu le constater en l'analysant, le programme *stack.c* lit le contenu d'un fichier nommé *badfile*. Par conséquent, notre objectif va être de créer un contenu pour le fichier badfile nous permettant d'exploiter le problème de débordement mémoire pour lancer un shellcode (et par conséquent de prendre le contrôle du terminal de la victime).
+
+
 
 
 **Q. Contremesures**
