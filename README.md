@@ -72,7 +72,12 @@ Ensuite, il va falloir configurer la machine de l'utilisateur :
         
 3. En utilisant la commande *dig google.fr*, vérifiez que cela a bien fonctionné.
 
-Dans un troisième temps, il va falloir mettre en place le serveur DNS local (machine serveur DNS)
+Dans un troisième temps, il faudrait normalement mettre en place le serveur DNS local. Toutefois, ceci a déjà été réalisé sur ces VMs. Les deux principales étapes ayant été réalisées sont la configuration du serveur DNS BIND 9 et la mise en veille de DNSSEC (qui vise à empêcher les attaques de type *spoofing* qui pourraient être menées à l'encontre du serveur).
+
+
+
+
+il va falloir mettre en place le serveur DNS local (machine serveur DNS)
 
 **Q.** Contremesures
 
@@ -80,7 +85,55 @@ Dans un troisième temps, il va falloir mettre en place le serveur DNS local (ma
 
 
 **Q.** Contremesures
+
 ## 3. Une seconde mise en pratique : Attaques logicielles
+
+Dans cette partie, nous allons nous intéresser aux attaques de débordement de la mémoire tampon (*Buffer Overflow*). 
+
+**Q.** Qu'est ce qu'une attaque par débordement de mémoire ? Expliquez le principe de façon claire. Quelles peuvent en être les conséquences de ces attaques (ie quel est l'objectif de l'attaquant) ?
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées par : https://aayushmalla56.medium.com/buffer-overflow-attack-dee62f8d6376.
+
+Pour pouvoir mener à bien ces attaques par débordement de mémoire, nous allons devoir désactiver les différentes contremesures nativement présentes dans le système d'exploitation Ubuntu. Pour ce faire entrez les lignes de commande suivante :
+
+```console
+sudo sysctl -w kernel.randomize_va_space=0
+
+sudo ln -sf /bin/zsh /bin/sh
+```
+
+### Tâche 1 : Lancement du shellcode
+
+```console
+#include <stdio.h>
+
+int main() {
+   char*name[2];
+   name[0] = "/bin/sh";
+   name[1] = NULL;
+   execve(name[0], name, NULL);
+   }
+
+```
+
+Créez un fichier correpondant au programme ci-dessus (qui est un *shellcode*) et lancez le en utilisant la commande suivante :
+
+```
+gcc -z execstack -o call_shellcode call_shellcode.c
+```
+
+*Note : Spécifier "-z execstack" permet d'indiquer que l'on souhaite que la pile puisse être exécutable. Ceci s'avèrera nécessaire pour que l'on puisse mener à bien les attaques par débordement de mémoire.* 
+
+**Q.** Que semble permettre de faire le programme que vous venez de lancer ? Qu'est ce qu'est donc basiquement un *shellcode* ?
+
+### Tâche 2 : Découverte du programme vulnérable
+
+**Q. Contremesures**
+
+
+
+
+
 
 ## 4. Etude théorique : Attaques par canaux auxilaires (*Side-channel attack*)
 
@@ -88,7 +141,7 @@ Dans cette partie, au travers d'une étude théorique, nous allons nous intéres
 
 **Q.** Qu'est ce qu'une attaque par canaux auxiliaires ? Que cherche-t-on généralement à deviner ? Quelles valeurs peuvent être mesurées ?
 
-Pour répondre à cette question vous pourrez utiliser les informations présentées par : http://www.bibmath.net/crypto/index.php?action=affiche&quoi=chasseur/canalauxiliaire
+Pour répondre à cette question, vous pourrez utiliser les informations présentées par : http://www.bibmath.net/crypto/index.php?action=affiche&quoi=chasseur/canalauxiliaire
 
 ### 4.A Attaque simple par analyse de courant (*Simple Power Analysis*)
 
