@@ -34,7 +34,7 @@ Dans la suite de ce TP, aux travers de mises en pratique/analyses théoriques, n
 
 Dans cette partie, nous allons mettre en pratique différents types d'attaques réseau/logicielles. Nous nous intéresserons également aux contre-mesures permettant de se prémunir contre ces différentes attaques.
 
-Il est à noter que l'environnement utilisé ici est basé sur une plateforme développée par l'université d'Orléans (https://celene.univ-orleans.fr/course/view.php?id=2575).
+Il est à noter que l'environnement utilisé ici est basé sur une plateforme développée par l'université d'Orléans (https://celene.univ-orleans.fr/course/view.php?id=2575) et l'Université de Manchester.
 
 ### 2.A Mise en place de l'environnement
 
@@ -116,6 +116,45 @@ Vous pourrez également vous inspirer de la solution proposée par https://mediu
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://en.wikipedia.org/wiki/ARP_spoofing#Defenses
 
+### 2.B Une seconde attaque : Déni-de-Service 
+
+**Q.** Qu'est ce qu'une attaque de Déni-de-Service ? Quel est son objectif ? 
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://fr.wikipedia.org/wiki/Attaque_par_d%C3%A9ni_de_service
+
+#### Smurf
+
+Les attaques de type *Smurf* sont un premier type possible d'attaques de DoS.
+
+**Q.** Quel est le principe de ces attaques ?
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://en.wikipedia.org/wiki/Smurf_attack
+
+Créez au niveau d'oscar, une ligne de commande Scapy permettant de forcer alice à envoyer en boucle des requêtes ICMP à l'adresse de broacast 10.255.255.255. Comme indiqué plus tôt, `sr1(IP(dst="10.0.0.1")/ICMP()/"bonjour")` pourrait permettre l'envoi d'une requête ICMP. 
+
+**Q.** Indiquez la ligne de commande permettant de mener à bien ce genre d'attaque.
+
+**Q.** Quels sont les risques de ce genre d'attaques ? Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
+
+#### SYN Flood
+
+#### Ping of Death
+
+
+
+#### Attaques de Déni-de-Service avancées
+
+### 2.C Une troisième attaque : Vol de session
+
+#### TCP Hijacking
+
+#### Man-in-the-Middle
+
+### 2.D Une quatrième attaque : Prise de contrôle
+
+#### Par dépassement de tampon
+
+#### Telnetd remote exploit
 
 
 
