@@ -34,7 +34,11 @@ Dans la suite de ce TP, aux travers de mises en pratique/analyses théoriques, n
 
 Dans cette partie, nous allons mettre en pratique différents types d'attaques réseau/logicielles. Nous nous intéresserons également aux contre-mesures permettant de se prémunir contre ces différentes attaques.
 
+Il est à noter que l'environnement utilisé ici est basé sur une plateforme développée par l'université d'Orléans (https://celene.univ-orleans.fr/course/view.php?id=2575).
+
 ### 2.A Mise en place de l'environnement
+
+#### VirtualBox et Netkit
 
 Pour mener à bien ces expérimentations, nous allons utiliser deux outils principaux :
 * VirtualBox (install pour Linux : https://www.virtualbox.org/wiki/Linux_Downloads)
@@ -44,7 +48,38 @@ Il est à noter que pour faciliter l'installation, nous l'allons pas directement
 
 **Q.** Expliquez ce qu'est NetKit ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
 
-Au delà de ces deux outils, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP.
+#### Lab d'expérimentation
+
+Au delà de ces deux outils, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP. Il s'agit du dossier compressé *lab.tar.gz* accessible à la racine de ce repo GitHub.
+
+Une fois la VM lancée (le mot de passe est le nom d'utilisateur), téléchargez ce dossier compressé et décompressez le.
+
+A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier, il devrait vous être possible de lancer l'environnement d'expérimentation. Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash*.
+
+L'environnement qui va être émulé ici se compose au total de trois hôtes et de deux sous réseaux (*lana*, *lanb*) :
+- alice (10.0.0.1; 10.0.0.0/8) est un hôte vulnérable ;
+- bob (192.168.0.1; 192.168.0.0/24) est un second hôte vulnérable ;
+- oscar est un utilisateur malveillant (10.0.0.2; 10.0.0.0/8).
+
+Il est à noter que l'adresse de la passerelle sur sous réseau *lana* est 10.255.255.254.
+
+#### Scapy
+
+Un autre outil qui va s'avérer très important dans la suite de ces expérimentations est Scapy. Vous pourrez l'utiliser et le lancer en utilisant les commandes suivantes :
+
+```console
+git clone https://github.com/secdev/scapy.git
+cd scapy
+./run_scapy
+```
+
+**Q.** Expliquez ce qu'est Scapy (https://github.com/secdev/scapy) ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
+
+#### Wireshark
+
+Tout au long des expérimentations, nous allons utiliser Wireshark pour analyser les échanges entre les différentes hôtes et en déduire les conséquences des attaques qui seront menées par oscar.
+
+Depuis un terminal, la commande permettant d'accéder à un des sous réseaux créé par NetKit (*lana*, *lanb*) est : `vdump *nom_ss_reseau* | wireshark -i - -k &`
 
 
 
