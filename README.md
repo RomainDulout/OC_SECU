@@ -81,64 +81,44 @@ Tout au long des expérimentations, nous allons utiliser Wireshark pour analyser
 
 Depuis un terminal, la commande permettant d'accéder à un des sous réseaux créé par NetKit (*lana*, *lanb*) est : `vdump *nom_ss_reseau* | wireshark -i - -k &`
 
+### 2.B Une première attaque : Empoisonnement des tables ARP
 
-
-
-Les attaques réseau sont une première grande catégorie d'attaques qui peuvent être menées contre les objets IoT.
+Il s'agit là d'une première attaque réseau envisageable. Les attaques réseau sont une première grande catégorie d'attaques qui peuvent être menées contre les objets IoT.
 
 **Q.** Ces attaques se décomposent généralement en 4 à 5 grandes étapes, lesquelles ?
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://blog.f-secure.com/fr/les-5-phases-dune-cyber-attaque-le-point-de-vue-du-pirate/
 
-Dans cette partie, nous allons plus particulièrement nous intéresser à deux attaques réseau courantes : les vulnérabilités de DNS et les vulnérabilités du protocole TCP/IP.
+**Q.** Rappelez quelle est l'utilité d'une table ARP et à quoi correspondent les ARP Query and Reply. Indiquez également quel pourrait être l'intérêt de s'attaquer à ces tables ARP (*ARP Spoofing/ARP Poisoning*).
 
-Note : Les VMs Ubuntu utilisées sont de base configurées en anglais. Pour remédier à cela et pouvoir utiliser un clavier Français, on faut vous rendre dans *Systems Parameters* puis *Text entry* puis ajouter la langue française ("*+*" *French*). Vous aurez ensuite la possibilité de changer de langue.
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://fr.wikipedia.org/wiki/ARP_poisoning
 
-### 2.A Vulnérabilités de DNS
+L'objectif d'oscar, en utilisant Scapy, va ici être d'empoisonner la table ARP d'alice et de se faire passer pour sa passerelle 10.255.255.254. Ainsi, il recevra le trafic destiné à la passerelle.
 
-Basiquement, un serveur DNS (*Domain Name System*) permet de réaliser la conversion entre des noms de domaines (URL par exemple) et adresses IP.
+Pour ce faire, oscar va devoir envoyer toutes les secondes à alice un paquet ARP forgé indiquant que son adresse MAC correspond à l'adresse MAC de la passerelle.
 
-Dans cette partie, après avoir lancé un serveur SDN, nous allons essayer de voir comment un attaquant pourrait modifier le comportement de ce serveur et rediriger les utilisateurs vers des destinations non voulues et potentiellement malicieuses.
+Pour parvenir à ceci, vous devrez utiliser Scapy qui permet l'envoi et la manipulation de paquets.
 
-#### Mise en place de l'environnement
+Par exemple, l'utilisation de Scapy dans le terminal d'oscar, et le lancement de la commande suivante dans Scapy `sr1(IP(dst="10.0.0.1")/ICMP()/"bonjour")` permettrait d'envoyer un ping à Alice et d'en afficher la réponse.
 
-Pour mener à bien cette partie, nous allons utiliser deux outils principaux
+Pour créer la ligne permettant cette redirection, vous pourrez utiliser différentes commandes de Scapy, notamment (*getmacbyip, Ether, ARP*).
 
+Vous pourrez également vous inspirer de la solution proposée par https://medium.com/datadriveninvestor/arp-cache-poisoning-using-scapy-d6711ecbe112 
 
-Pour pouvoir mener à bien cette partie, il va tout d'abord être nécessaire de mettre en place l'environnement.
+**Q.** Indiquez la ligne de commande que vous avez utilisée pour empoisonner la table ARP d'alice. Indiquez également quels sont les mots clés permettant d'indiquer le nombre de message que l'on souhaite envoyer ainsi que la fréquence.
 
-On va ici considérer 3 machines :
+ À l'aide de Wireshark, vous pouvez vérifier que l'empoisonnement de la table ARP a bien fonctionné. Pour ce faire, observez le trafic avec et sans empoisonnement de la table ARP lorsque alce se connecte au service UDP echo de bob.
+ 
 
-   Utilisateur       ------------------     Attaquant    ---------------   Server DNS
-(IP : 10.0.2.18)                          (IP : 10.0.2.17)               (IP : 10.0.2.16)
+**Q.** Quelles différences observez vous ? A quoi correspond cette redirection ?
 
-Sur VirtualBox, il va donc falloir lancer 3 VM Ubuntu différentes, en définissant leurs IPs et en indiquant dans les préférences réseau "NAT Network".
+**Q.** Quelles contre-mesures peuvent être envisagées pour lutter contre ce genre d'attaques ? 
 
-Ensuite, il va falloir configurer la machine de l'utilisateur :
-
-1. Indiquez dans le fichier */etc/resolvconf/resolv.conf.d/head* l'adresse du serveur DNS :
-
-        *nameserver 10.0.2.16*
-
-2. Rechargez la configuration afin qu'elle prenne en compte cette modification :
-
-        *sudo resolvconf -u*
-        
-3. En utilisant la commande *dig google.fr*, vérifiez que cela a bien fonctionné.
-
-Dans un troisième temps, il faudrait normalement mettre en place le serveur DNS local. Toutefois, ceci a déjà été réalisé sur ces VMs. Les deux principales étapes ayant été réalisées sont la configuration du serveur DNS BIND 9 et la mise en veille de DNSSEC (qui vise à empêcher les attaques de type *spoofing* qui pourraient être menées à l'encontre du serveur).
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://en.wikipedia.org/wiki/ARP_spoofing#Defenses
 
 
 
 
-il va falloir mettre en place le serveur DNS local (machine serveur DNS)
-
-**Q.** Contremesures
-
-### 2.B Vulnérabilités du protocole TCP/IP
-
-
-**Q.** Contremesures
 
 ## 3. Une seconde mise en pratique : Attaques logicielles
 
