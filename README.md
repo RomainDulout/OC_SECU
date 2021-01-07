@@ -1,21 +1,23 @@
 # TP : Introduction à la sécurité dans l'Internet des Objets (IoT)
 
-Le but de ce TP est de nous offrir une petite introduction à la sécurité dans l'environnement IoT.
+Le but de ce TP est de vous offrir une petite introduction à la sécurité dans l'environnement IoT.
 
 **Note : A la fin de la scéance, pensez à m'envoyer un compte-rendu (court) répondant aux différentes questions présentes dans ce TP (leo.mendiboure@univ-eiffel.fr)**
 
+**Note : A condition que vous ayez installé/que vous installiez VirtualBox sur votre machine personnelle, il est tout à fait possible de réaliser ce TP sans se servir des machines de l'école.**
+
 ## 1. Petit retour sur les objets connectés
 
-Si la sécurité des objets connectés apparait aujourd'hui comme un élément essentiel, c'est tout d'abord parce plusieurs centaines de millions d'objets circulent aujourd'hui et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. C'est ensuite parce que ces objets rencontrent différents problèmes de sécurité :
-- un manque de supervision : peu ou pas de mises à jour de sécurité, peu de moyen de supervisions/détection des attaques, accès physique potentiel à l'objet
-- un manque de ressources : peu de ressources à consacrer à la sécurité (difficile déploiement de solutions cryptographiques, absence de sécurité pour les environnements d'exécution), peu de ressources (stockage, calcul, communication) dans l'absolu...
-- une manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité)
+La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons.Tout d'abord parce plusieurs centaines de millions d'objets circulent aujourd'hui et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
+- un manque de supervision : peu ou pas de mises à jour de sécurité, peu de moyen de supervisions/détection des attaques, accès physique potentiel à l'objet ;
+- un manque de ressources : peu de ressources à consacrer à la sécurité (difficile déploiement de solutions cryptographiques, absence de sécurité pour les environnements d'exécution), peu de ressources (stockage, calcul, communication) dans l'absolu ;
+- une manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité).
 
 Bien que ces objets connectés soient généralements associés à des gadgets dans l'imaginaire collectifs, comme l'on montré différentes attaquées passées ou actuelles (Jeep hack, Nest hack, Vtech hack, Mirai), la vulnérabilité de ces objets entraine des risques importants :
-- attaques destructrices : ces attaques, potentiellement à grande échelle (Shodan), peuvent entraîner, par exemple, la déstabilisation de grands groupes industriels voire d'états (concurrents ?)
-- espionnage : captation de données personnelles, détournement de l'usage de capteurs (micros, caméras, etc.)
-- sabotage : perturbation du fonctionnement d'un service (ville intelligente, transport, énergie, etc.)
-- détournement de l'utilisation d'objets connectés : Botnets (DDoS, Spam, etc.)
+- attaques destructrices : ces attaques, potentiellement à grande échelle (Shodan), peuvent entraîner, par exemple, la déstabilisation de grands groupes industriels voire d'états (concurrents/ennemis ?) ;
+- espionnage : captation de données personnelles, détournement de l'usage de capteurs (micros, caméras, etc.) ;
+- sabotage : perturbation du fonctionnement d'un service (ville intelligente, transport, énergie, etc.) ;
+- détournement de l'utilisation d'objets connectés : Botnets (DDoS, Spam, etc.).
 
 
 **Q.1** Rappelez quels sont les éléments présents dans l'architecture IoT. Déduisez-en à quel niveau peuvent se produire les attaques contre cette architecture.  
@@ -26,12 +28,26 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10
 
-Dans la suite de ce TP (par manque de temps), nous nous focaliserons sur les attaques au niveau réseau et au niveau de l'objet IoT lui même (logicielles et physiques).
+Dans la suite de ce TP, aux travers de mises en pratique/analyses théoriques, nous nous focaliserons sur trois types d'attaques : matérielles (physiques), logicielles et réseau.
 
-Il est à noter que les mises en pratique proposées dans les sections **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique.
+## 2. Attaques réseau et logicielles
+
+Dans cette partie, nous allons mettre en pratique différents types d'attaques réseau/logicielles. Nous nous intéresserons également aux contre-mesures permettant de se prémunir contre ces différentes attaques.
+
+### 2.A Mise en place de l'environnement
+
+Pour mener à bien ces expérimentations, nous allons utiliser deux outils principaux :
+* VirtualBox (install pour Linux : https://www.virtualbox.org/wiki/Linux_Downloads)
+* NetKit (install : https://www.brianlinkletter.com/installing-netkit/)
+
+Il est à noter que pour faciliter l'installation, nous l'allons pas directement installer l'environnement NetKit sur les machines (sauf si vous souhaitez vous même réaliser l'installation) mais plutôt utiliser une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542) vous pourrez récupérer cette machine virtuelle.
+
+**Q.** Expliquez ce qu'est NetKit ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
+
+Au delà de ces deux outils, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP.
 
 
-## 2. Une première mise en pratique : Attaques réseau
+
 
 Les attaques réseau sont une première grande catégorie d'attaques qui peuvent être menées contre les objets IoT.
 
@@ -50,6 +66,9 @@ Basiquement, un serveur DNS (*Domain Name System*) permet de réaliser la conver
 Dans cette partie, après avoir lancé un serveur SDN, nous allons essayer de voir comment un attaquant pourrait modifier le comportement de ce serveur et rediriger les utilisateurs vers des destinations non voulues et potentiellement malicieuses.
 
 #### Mise en place de l'environnement
+
+Pour mener à bien cette partie, nous allons utiliser deux outils principaux
+
 
 Pour pouvoir mener à bien cette partie, il va tout d'abord être nécessaire de mettre en place l'environnement.
 
@@ -266,6 +285,10 @@ Cette attaque, basée sur des variations très petites, et non liée à une erre
 **Q.** Quelles contremesures pourraient être proposées contre ce genre d'attaques ?
 
 ## 5. Pour aller plus loin
+
+Il est à noter que les mises en pratique proposées dans les sections **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique.
+
+
 
 Comme cela a déjà été indiqué, les expérimentations proposées dans les section **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). 
 
