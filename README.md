@@ -177,6 +177,37 @@ Comme vous pouvez le constater le paquet ICMP, étant fragmenté, peut être env
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://www.imperva.com/learn/ddos/ping-of-death/
 
+#### Fragment de chevauchement (Overlapping Fragments)
+
+**Q.** Quel est le principe de ces attaques ? 
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans  https://cyberhoot.com/cybrary/fragment-overlap-attack/
+
+Si oscar souhaitait mener ce genre d'attaque contre alice, il devrait créer trois fragments avec Scapy, en utilisant pour chacun d'eus l'adresse IP d'alice. 
+
+```console
+frag1=IP(dst=dstIP, id=12345, proto=1, frag=0, flags=1)/ICMP(type=8, code=0, chksum=0xdce8)
+frag2=IP(dst=dstIP, id=12345, proto=1, frag=2, flags=1)/”ABABABAB”
+frag3=IP(dst=dstIP, id=12345, proto=1, frag=1, flags=0)/”AAAAAAAABABABABACCCCCCCC”
+```
+
+Pour pouvoir analyser les messages reçus par alice, pour cette fois ci, au lieu d'utiliser wireshark, nous pourrons également lancer Scapy chez alice et sniffer les messages qu'elle reçoit grâce à la commande : `a = sniff(filter='icmp')`
+
+Une fois ceci réalisé, oscar peut envoyer séquentiellement les trois fragments à alice :`sent(frag1)...`
+
+On peut alors stopper le sniffer chez alice et analyser les données reçues grâce aux commandes suivantes :
+
+```console
+a.nsummary()
+a[0]
+a[1]
+a[2]
+a[3]
+```
+Ceci devrait vous permettre de visualiser un résumé complet des paquets ICMP reçus par alice ainsi qu'un résumé de chacun de ces paquets. Le 4ème paquet montre la réponse d'alice et devrait indiquer que le second fragment contient un décalage incorrect (*offset*).
+
+**Q.** Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
+
 
 #### Attaques de Déni-de-Service avancées
 
@@ -188,7 +219,11 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 ### 2.C Une troisième attaque : Vol de session
 
+Un troisième type d'attaque possible sont les attaques dites de vol de session.
+
 #### TCP Hijacking
+
+**Q.**
 
 #### Man-in-the-Middle
 
