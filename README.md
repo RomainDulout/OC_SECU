@@ -194,75 +194,55 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 ### 2.D Une quatrième attaque : Prise de contrôle
 
-#### Par dépassement de tampon
+Un autre type d'attaques peut avoir pour objectif de prendre le contrôle d'une machine locale/distance.
 
-#### Telnetd remote exploit
-
-
-
-
-## 3. Une seconde mise en pratique : Attaques logicielles
-
-Dans cette partie, nous allons nous intéresser aux attaques de débordement de la mémoire tampon (*Buffer Overflow*). 
+#### Prise de contrôle par dépassement de tampon
 
 **Q.** Qu'est ce qu'une attaque par débordement de mémoire ? Expliquez le principe de façon claire. Quelles peuvent en être les conséquences de ces attaques (ie quel est l'objectif de l'attaquant) ?
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées par : https://aayushmalla56.medium.com/buffer-overflow-attack-dee62f8d6376.
 
-Pour pouvoir mener à bien ces attaques par débordement de mémoire, nous allons devoir désactiver les différentes contremesures nativement présentes dans le système d'exploitation Ubuntu. Pour ce faire entrez les lignes de commande suivante :
+Ainsi, les attaque par dépassement de tampon ont généralement pour objectif de réussir à écrire dans la pile pour écraser l'adresse de retour de la fonction en cours d'exécution et provoquer une redirection vers un autre programme tel qu'un *shellcode* situé dans la pile.
+
+**Q.** Qu'est ce qu'un *shellcode* ?
+
+Pour mener à bien cette attaque, sur la machine oscar, nous allons utiliser le fichier vulnérable *hello.c*
+
+**Q.** En analysant la variable buf, indiquez en quoi son utilisation rend le programme vulnérable. Comment pourriez vous provoquer pour ce programme une erreur d'exécution de type "SegFault" ? Que se passerait il alors ?
+
+Le programme *exhello.py* permet de modeler le contenu de la pile du programme *hello*. *exhello.py* prend en argument une adresse utilisée ici pour écraser l'adresse de retour du programme *hello*. Par exemple, l'adresse de la fonction hello pourrait être utilisée :
 
 ```console
-sudo sysctl -w kernel.randomize_va_space=0
-
-sudo ln -sf /bin/zsh /bin/sh
+./exhello.py 0x8048254 | ./hello
 ```
 
-### Tâche 1 : Lancement du shellcode
+**Q.** Que se passe t il lorsque l'on exécute la ligne ci dessus ?
+
+Le programme *exhello.py* permet d'ajouter au début de buf un shellcode. En combinant les commandes *exhello.py*, *hello* et *cat*, faites en sorte qu'il devienne possible d'exécuter une commande shell (n'importe laquelle) à travers le processus hello.
+
+**Q.** Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées par : https://www.linuxjournal.com/article/6701
+
+#### Telnetd remote exploit
+
+Pour que la prise de contrôle à distance d'une machine soit possible, différentes conditions doivent être réunies. Tout d'abord le service utilisé pour cette prise de contrôle doit disposé de failles exploitables. Ensuite, ce service doit disposé de privilèges élevés. ssh et telnet sont des exemples intéressants de ce type de services (failles + privilèges).
+
+Pour ces services, différentes failles ont déjà été rendues publiques. Pour telnet, c'est par exemple le cas de la faille CVE-2011-4862. Ainsi, des exploits permettant d'exploiter cette faille on été publiés à l'image de *telnetd-encrypt_keyid*. Cette faille étant rendu publique, elle n'est bien entendu plus exploitable sur la plupart des systèmes actuels (mises à jour). Toutefois, dans le cadre de cette expérimentation, la machine alice a été configurée pour être vulnérable à ce type d'attaques.
+
+Le code permettant de l'exploiter a été déployée sur oscar et adaptée à ce TP.
+
+Ainsi, sans même connaître le mot de passe du super-utilisateur d'alice, grâce à cette exploit, vous pourrez constater qu'il est possible d'obtenir sur oscar un shell root sur la machine alice : 
 
 ```console
-#include <stdio.h>
-
-int main() {
-   char*name[2];
-   name[0] = "/bin/sh";
-   name[1] = NULL;
-   execve(name[0], name, NULL);
-   }
-
+./paf 10.0.0.1 23 3
 ```
 
-Créez un fichier correpondant au programme ci-dessus (qui est un *shellcode*) et lancez le en utilisant la commande suivante :
+Utilisez Wireshark pour analyser les messages échangés.
 
-```
-gcc -z execstack -o call_shellcode call_shellcode.c
-```
+**Q.** En vous basant sur ces observations, ainsi que la documentation de la faille CVE-2011-4862 (https://nvd.nist.gov/vuln/detail/CVE-2011-4862) et le code du programme *paf.c*, expliquez comment fonctionne cette attaque. 
 
-*Note : Spécifier "-z execstack" permet d'indiquer que l'on souhaite que la pile puisse être exécutable. Ceci s'avèrera nécessaire pour que l'on puisse mener à bien les attaques par débordement de mémoire.* 
-
-**Q.** Que semble permettre de faire le programme que vous venez de lancer ? Qu'est ce qu'est donc basiquement un *shellcode* ?
-
-### Tâche 2 : Découverte du programme vulnérable
-
-Le programme vulnérable, présent dans le dossier *Part3*, est nommé *stack.c*.
-
-**Q.** En analysant la fonction *bof*, expliquez pourquoi ce programme est vulnérable aux attaques par débordement de mémoire.
-
-Nous allons maintenant compiler ce programme. Pour ce faire, il nous faut suivre les étapes suivantes :
-1. Lancer la commande permettant de compiler le programme `gcc -o stack -z execstack -fno-stack-protector stack.c`
-2. Transformer l'exécutable en un programme root : `sudo chown root stack` puis `sudo chmod 4755 stack`
-
-### Tâche 3 : Exploitation de la vulnérabilité
-
-Comme vous avez pu le constater en l'analysant, le programme *stack.c* lit le contenu d'un fichier nommé *badfile*. Par conséquent, notre objectif va être de créer un contenu pour le fichier badfile nous permettant d'exploiter le problème de débordement mémoire pour lancer un shellcode (et par conséquent de prendre le contrôle du terminal de la victime).
-
-
-
-
-**Q. Contremesures**
-
-
-
-
+**Q.** Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
 
 
 ## 4. Etude théorique : Attaques par canaux auxilaires (*Side-channel attack*)
@@ -363,7 +343,6 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 
 
-
 ### 4.C Ouverture : Attaque différentielle par analyse de courant (*Differential Power Analysis*)
 
 Alors que les attaques SPA et par injection de fautes font partie des attaques "simples", pouvant être exécutées dans un environnement peu protégé (ce qui correspond à bon nombre d'objets IoT), les attaques DPA font partie d'attaques plus complexes pouvait être exécutées contre des systèmes mieux protégés.
@@ -382,13 +361,9 @@ Cette attaque, basée sur des variations très petites, et non liée à une erre
 
 ## 5. Pour aller plus loin
 
-Il est à noter que les mises en pratique proposées dans les sections **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). Ce projet, mondial, vise à favoriser l'apprentissage de la sécurité informatique.
+Au delà des différentes expérimentations proposées dans les sections précédentes, vous pourriez par vous même mettre en pratique d'autres types d'attaques. Pour ce faire le projet SEED pourrait être un outil intéressant offrant de nombreuses ressources.
 
-
-
-Comme cela a déjà été indiqué, les expérimentations proposées dans les section **2** et **3** s'inspirent fortement des exercices pratiques proposés par le projet SEED (https://seedsecuritylabs.org/). 
-
-**Q.** Indiquez, au delà des attaques réseau et logicielles, les questions auxquelles vous pourriez vous former grâce à ce projet.
+**Q.** Indiquez, au delà des attaques réseau et logicielles, les types d'attaques auxquels vous pourriez vous former grâce à ce projet.
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées par : https://seedsecuritylabs.org/Labs_20.04/ 
 
@@ -400,7 +375,7 @@ Pour répondre à cette question vous pourrez utiliser les informations présent
 
 Pour votre culture personnelle (ou votre divertissement ?) un outil, évoqué dans l'introduction de ce TP, qu'il pourrait vous être utile de connaître est Shodan.
 
-**Q.** Qu'est ce que Shodan (https://www.shodan.io/) ? Comment cet outil semble-t-il fonctionner ? Comment pourrait-il être utilisé ?
+**Q.** Qu'est ce que Shodan (https://www.shodan.io/) ? Comment cet outil semble-t-il fonctionner ? Comment pourrait-il être utilisé ? Quels sont les risques ?
 
 
 
