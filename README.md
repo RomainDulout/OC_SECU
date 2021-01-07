@@ -138,11 +138,53 @@ Créez au niveau d'oscar, une ligne de commande Scapy permettant de forcer alice
 
 #### SYN Flood
 
+Les attaques de type *SYN Flood* sont un second type possible d'attaques de DoS.
+
+**Q.** Quel est le principe de ces attaques ?
+
+Nous allons maintenant essayer de mener ce genre d'attaque à l'encontre d'alice.
+
+Pour ce faire, il suffit à oscar de créer un paquet multi-couche destiné à alice :
+
+```console
+topt=[(‘Timestamp’, (10,0))]
+p=IP(dst="...", id=1111,ttl=99)/TCP(sport=RandShort(),dport=[22,80],seq=12345,ack=1000,window=1000,flags=”S”,options=topt)/”SYNFlood”
+ans,unans=srloop(p,inter=0.2,retry=2,timeout=6)
+```
+
+**Q.** A quoi servent à votre avis les éléments aléatoires de ce message (id, ttl) ?
+
+Ainsi, avec ces quelques lignes, oscar va envoyer à alice un paquet toutes les 0.2secondes pendant 6 secondes. Il s'agit là d'un exemple simple correspondant à une attaque de type *SYN Flood*. Cette succession rapide de requêtes SYN pourrait entraîner une surcharge du système d'Alice et pourrait donc rendre impossible l'accès aux services d'alice (par exemple un service telnet).
+
+**Q.** Quels sont les risques de ce genre d'attaques ? Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
+
+
 #### Ping of Death
 
+Les attaques de type *Ping of Death* sont un troisième type possible d'attaques de DoS.
+
+**Q.** Quel est le principe de ces attaques ?
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://en.wikipedia.org/wiki/Ping_of_death
+
+Si oscar souhaite mener ce type d'attaque à l'encontre d'alice, avec Scapy, il lui suffira d'utiliser une commande du type `send(fragment(IP(dst=dip)/ICMP()/(‘X’*60000))`.
+
+Lancez cette commande et regarder le wireshark de *lana*.
+
+Comme vous pouvez le constater le paquet ICMP, étant fragmenté, peut être envoyé bien que sa taille soit supérieure à la taille maximale définie pour ce type de paquet. Toutefois, le réassemblage de ce paquet pourrait perturber le bon fonctionnement d'alice.
+
+**Q.** Quels sont les risques de ce genre d'attaques ? Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://www.imperva.com/learn/ddos/ping-of-death/
 
 
 #### Attaques de Déni-de-Service avancées
+
+Aujourd'hui, les attaques modernes représentent un danger réel pour les entreprises. En effet, elle pourrait entraîner une perturbation de leur fonctionnement tant en interne qu'en externe. Ces attaques sont capables d'atteindre des débits très élevés de l'ordre de plusieurs millirs de Gb/s. Pour ce faire, ces attaques se basent généralement sur des approches distribuées et sur l'utlisation de réflecteur.
+
+**Q.** En prenant l'exemple de l'attaque *Mirai*, expliquez ce que sont ces réflecteurs et comment fonctionnent ces attaques DDoS. Indiquez également quelles sont les contre-mesures qui peuvent être mises en place.
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://www.imperva.com/blog/how-to-identify-a-mirai-style-ddos-attack/
 
 ### 2.C Une troisième attaque : Vol de session
 
