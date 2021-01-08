@@ -38,7 +38,7 @@ Dans cette partie, nous allons mettre en pratique différents types d'attaques r
 
 Il est à noter que l'environnement utilisé ici est basé sur une plateforme développée par l'université d'Orléans (https://celene.univ-orleans.fr/course/view.php?id=2575) et l'Université de Manchester.
 
-#### VirtualBox et Netkit
+#### Netkit
 
 Pour mener à bien ces expérimentations, nous allons utiliser un outil principal : NetKit (install :https://www.netkit.org/).
 
@@ -46,7 +46,7 @@ Pour réaliser l'installation de cet outil sur votre machine, il vous faudra ré
 
 Une fois les étapes réalisées, grâce au fichier `./check_configuration.sh`, vérifiez que l'installation a correctement été réalisée
 
-Il est à noter que si vous souhaitez réaliser ce TP directement sur votre machine, vous pouvez le faire en utilisant une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542), vous pourrez récupérer cette machine virtuelle.
+Il est à noter que si vous souhaitez réaliser ce TP directement sur votre machine personnelle (et non les ordinateurs de l'école), vous pouvez le faire en utilisant une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542), vous pourrez récupérer cette machine virtuelle.
 
 **Q.3** Expliquez ce qu'est NetKit. Expliquez également quel pourra être l'intérêt de cet outil dans le cadre de ce TP.
 
@@ -56,7 +56,9 @@ Au delà de cet outil, nous allons également avoir besoin du lab Netkit contena
 
 Téléchargez ce dossier compressé et décompressez le.
 
-A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier (Attention, *lstart* est un fichier binaire de NetKit, le chemin menant à ce fichier */netkit/bin* doit être précisé !), il devrait vous être possible de lancer l'environnement d'expérimentation. Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash* (*lclean* permettant de nettoyer la config).
+A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier (Attention, *lstart* est un fichier binaire de NetKit, le chemin menant à ce fichier **.../netkit/bin** doit être précisé !), il devrait vous être possible de lancer l'environnement d'expérimentation. 
+
+Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash* (*lclean* permettant de nettoyer la config).
 
 L'environnement qui va être émulé ici se compose au total de trois hôtes et de deux sous réseaux (*lana*, *lanb*) :
 - alice (10.0.0.1; 10.0.0.0/8) est un hôte vulnérable ;
