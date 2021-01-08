@@ -40,21 +40,23 @@ Il est à noter que l'environnement utilisé ici est basé sur une plateforme d�
 
 #### VirtualBox et Netkit
 
-Pour mener à bien ces expérimentations, nous allons utiliser deux outils principaux :
-* VirtualBox (install pour Linux : https://www.virtualbox.org/wiki/Linux_Downloads)
-* NetKit (install : https://www.brianlinkletter.com/installing-netkit/)
+Pour mener à bien ces expérimentations, nous allons utiliser un outil principal : NetKit (install :https://www.netkit.org/).
 
-Il est à noter que pour faciliter l'installation, nous n'allons pas directement installer l'environnement NetKit sur les machines (sauf si vous souhaitez vous même réaliser l'installation) mais plutôt utiliser une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542), vous pourrez récupérer cette machine virtuelle.
+Pour réaliser l'installation de cet outil sur votre machine, il vous faudra récupérer l'ensemble des sources (3 dossiers compressés !) à l'adresse suivante (https://www.netkit.org/) puis suivre les trois étapes décrites dans (https://www.brianlinkletter.com/installing-netkit/).
+
+Une fois les étapes réalisées, grâce au fichier `./check_configuration.sh`, vérifiez que l'installation a correctement été réalisée
+
+Il est à noter que si vous souhaitez réaliser ce TP directement sur votre machine, vous pouvez le faire en utilisant une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542), vous pourrez récupérer cette machine virtuelle.
 
 **Q.3** Expliquez ce qu'est NetKit. Expliquez également quel pourra être l'intérêt de cet outil dans le cadre de ce TP.
 
 #### Lab d'expérimentation
 
-Au delà de ces deux outils, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP. Il s'agit du dossier compressé *lab.tar.gz* accessible à la racine de ce repo GitHub.
+Au delà de cet outil, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP (ie l'environnement de simulation utilisé). Il s'agit du dossier compressé *lab.tar.gz* accessible à la racine de ce repo GitHub.
 
-Une fois la VM lancée (le mot de passe est *tpuser*), téléchargez ce dossier compressé et décompressez le.
+Téléchargez ce dossier compressé et décompressez le.
 
-A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier, il devrait vous être possible de lancer l'environnement d'expérimentation. Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash* (*lclean* permettant de nettoyer la config).
+A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier (Attention, *lstart* est un fichier binaire de NetKit, le chemin menant à ce fichier */netkit/bin* doit être précisé !), il devrait vous être possible de lancer l'environnement d'expérimentation. Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash* (*lclean* permettant de nettoyer la config).
 
 L'environnement qui va être émulé ici se compose au total de trois hôtes et de deux sous réseaux (*lana*, *lanb*) :
 - alice (10.0.0.1; 10.0.0.0/8) est un hôte vulnérable ;
@@ -65,7 +67,7 @@ Il est à noter que l'adresse de la passerelle du sous réseau *lana* est 10.255
 
 #### Scapy
 
-Un autre outil qui va s'avérer très important dans la suite de ces expérimentations est Scapy. Vous pourrez l'utiliser et le lancer en utilisant les commandes suivantes :
+Un autre outil qui va s'avérer très important dans la suite de ces expérimentations est Scapy. Vous pourrez l'utiliser et le lancer en utilisant les commandes suivantes (à l'intérieur des hôtes netkit, il est possible que cet outil soit déjà installé !) :
 
 ```console
 git clone https://github.com/secdev/scapy.git
@@ -75,13 +77,17 @@ cd scapy
 
 **Q.4** Expliquez ce qu'est Scapy (https://github.com/secdev/scapy) ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
 
-*Note : Pour pouvoir l'utiliser dans le cadre de ces expérimentations, il faudra le placer dans le dossier /lab/shared. Ainsi, il sera accessibles aux hôtes NetKit*
+*Note : Pour pouvoir l'utiliser dans le cadre de ces expérimentations, il faudra le placer dans le dossier /lab/shared. Ainsi, il sera accessibles aux hôtes NetKit. Comme tout fichier/dossier que vous positionnerez dans ce dossier partagé.*
 
 #### Wireshark
 
 Tout au long des expérimentations, nous allons utiliser Wireshark pour analyser les échanges entre les différentes hôtes et en déduire les conséquences des attaques qui seront menées par oscar.
 
-Depuis un terminal, la commande permettant d'accéder à un des sous réseaux créé par NetKit (*lana*, *lanb*) est : `vdump *nom_ss_reseau* | wireshark -i - -k &`
+Toutefois, avec NetKit (*vdump* n'étant pas accessible sauf si vous utilisez la VM) l'utilisation de Wireshark au sein des hôtes n'est pas aisée. 
+
+Utilisez https://www.lri.fr/~fmartignon/documenti/reseauxavances/Netkit_enonce_de1a3.pdf (page 4!) pour comprendre comment vous pourrez utiliser Wireshark dans le cadre de cette expérimentation.
+
+*Note : Si vous utilisez la VM, vous pourrez simplement utiliser la commande suivante :* `vdump *nom_ss_reseau* | wireshark -i - -k &`
 
 ### 2.B Une première attaque : Man-in-the-Middle
 
@@ -206,7 +212,7 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 Si oscar souhaite mener ce type d'attaque à l'encontre d'alice, avec Scapy, il lui suffira d'utiliser une commande du type `send(fragment(IP(dst=dip)/ICMP()/(‘X’*60000))`.
 
-Lancez cette commande et regarder le wireshark de *lana*.
+Lancez cette commande et regarder le wireshark du sous réseau dans lequel est situé alice.
 
 Comme vous pouvez le constater, le paquet ICMP, étant fragmenté, peut être envoyé, bien que sa taille soit supérieure à la taille maximale définie pour ce type de paquet. Toutefois, le réassemblage de ce paquet pourrait perturber le bon fonctionnement d'alice.
 
