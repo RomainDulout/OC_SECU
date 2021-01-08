@@ -8,12 +8,12 @@ Le but de ce TP est de vous offrir une petite introduction à la sécurité dans
 
 ## 1. Petit retour sur les objets connectés
 
-La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons. Tout d'abord parce plusieurs centaines de millions d'objets circulent aujourd'hui et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
+La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons. Tout d'abord parce plusieurs centaines de millions d'objets sont en circulation et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
 - un manque de supervision : peu ou pas de mises à jour de sécurité, peu de moyen de supervisions/détection des attaques, accès physique potentiel à l'objet ;
 - un manque de ressources : peu de ressources à consacrer à la sécurité (difficile déploiement de solutions cryptographiques, absence de sécurité pour les environnements d'exécution), peu de ressources (stockage, calcul, communication) dans l'absolu ;
 - une manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité).
 
-Bien que ces objets connectés soient généralements associés à des gadgets dans l'imaginaire collectifs, comme l'on montré différentes attaquées passées ou actuelles (Jeep hack, Nest hack, Vtech hack, Mirai), la vulnérabilité de ces objets entraine des risques importants :
+Bien que ces objets connectés soient généralements associés à des gadgets dans l'imaginaire collectif, comme l'on montré différentes attaques passées ou actuelles (Jeep hack, Nest hack, Vtech hack, Mirai), la vulnérabilité de ces objets entraine des risques importants :
 - attaques destructrices : ces attaques, potentiellement à grande échelle (Shodan), peuvent entraîner, par exemple, la déstabilisation de grands groupes industriels voire d'états (concurrents/ennemis ?) ;
 - espionnage : captation de données personnelles, détournement de l'usage de capteurs (micros, caméras, etc.) ;
 - sabotage : perturbation du fonctionnement d'un service (ville intelligente, transport, énergie, etc.) ;
@@ -34,9 +34,9 @@ Dans la suite de ce TP, aux travers de mises en pratique/analyses théoriques, n
 
 Dans cette partie, nous allons mettre en pratique différents types d'attaques réseau/logicielles. Nous nous intéresserons également aux contre-mesures permettant de se prémunir contre ces différentes attaques.
 
-Il est à noter que l'environnement utilisé ici est basé sur une plateforme développée par l'université d'Orléans (https://celene.univ-orleans.fr/course/view.php?id=2575) et l'Université de Manchester.
-
 ### 2.A Mise en place de l'environnement
+
+Il est à noter que l'environnement utilisé ici est basé sur une plateforme développée par l'université d'Orléans (https://celene.univ-orleans.fr/course/view.php?id=2575) et l'Université de Manchester.
 
 #### VirtualBox et Netkit
 
@@ -46,15 +46,15 @@ Pour mener à bien ces expérimentations, nous allons utiliser deux outils princ
 
 Il est à noter que pour faciliter l'installation, nous n'allons pas directement installer l'environnement NetKit sur les machines (sauf si vous souhaitez vous même réaliser l'installation) mais plutôt utiliser une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542), vous pourrez récupérer cette machine virtuelle.
 
-**Q.3** Expliquez ce qu'est NetKit ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
+**Q.3** Expliquez ce qu'est NetKit. Expliquez également quel pourra être l'intérêt de cet outil dans le cadre de ce TP.
 
 #### Lab d'expérimentation
 
 Au delà de ces deux outils, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP. Il s'agit du dossier compressé *lab.tar.gz* accessible à la racine de ce repo GitHub.
 
-Une fois la VM lancée (le mot de passe est le nom d'utilisateur), téléchargez ce dossier compressé et décompressez le.
+Une fois la VM lancée (le mot de passe est *tpuser*), téléchargez ce dossier compressé et décompressez le.
 
-A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier, il devrait vous être possible de lancer l'environnement d'expérimentation. Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash*.
+A partir de ce moment, en lançant simplement la commande *lstart*, à la racine de ce dossier, il devrait vous être possible de lancer l'environnement d'expérimentation. Pour l'arrêter, il vous suffira simplement de lancer dans le même terminal la commande *lcrash* (*lclean* permettant de nettoyer la config).
 
 L'environnement qui va être émulé ici se compose au total de trois hôtes et de deux sous réseaux (*lana*, *lanb*) :
 - alice (10.0.0.1; 10.0.0.0/8) est un hôte vulnérable ;
@@ -75,7 +75,7 @@ cd scapy
 
 **Q.4** Expliquez ce qu'est Scapy (https://github.com/secdev/scapy) ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
 
-*Note : Pour pouvoir l'utiliser dans le cadre de ces expérimentations, il faudra le placer dans le dossier /lab/shared*
+*Note : Pour pouvoir l'utiliser dans le cadre de ces expérimentations, il faudra le placer dans le dossier /lab/shared. Ainsi, il sera accessibles aux hôtes NetKit*
 
 #### Wireshark
 
@@ -111,10 +111,9 @@ Vous pourrez également vous inspirer de la solution proposée par https://mediu
 
 **Q.7** Indiquez la ligne de commande que vous avez utilisée pour empoisonner la table ARP d'alice. Indiquez également quels sont les mots clés permettant d'indiquer le nombre de message que l'on souhaite envoyer ainsi que la fréquence.
 
- À l'aide de Wireshark, vous pouvez vérifier que l'empoisonnement de la table ARP a bien fonctionné. Pour ce faire, observez le trafic avec et sans empoisonnement de la table ARP lorsque alce se connecte au service UDP echo de bob.
- 
+ À l'aide de Wireshark, vous pouvez vérifier que l'empoisonnement de la table ARP a bien fonctionné. Pour ce faire, observez le trafic avec et sans empoisonnement de la table ARP lorsque alice se connecte au service UDP echo de bob (`nc -u bob echo`). 
 
-**Q.8** Quelles différences observez vous ? A quoi correspond cette redirection ?
+**Q.8** Quelles différences observez vous (avec/sans empoisonnement) ? A quoi correspond cette redirection ?
 
 **Q.9** Quelles contre-mesures peuvent être envisagées pour lutter contre ce genre d'attaques ? 
 
@@ -129,20 +128,20 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 Pour mener simplement et rapidement ce genre d'attaque, nous allons utiliser un outil développé pour cet usage : *shijack*.
 
-Pour pouvoir l'utiliser ici, il vous suffira de télécharger l'archive (https://packetstormsecurity.com/sniffers/shijack.tgz), d'en extraire de contenu et de copier le dossier résultant dans */lab/shared*. Ainsi, cet outil pourra être à disposition des hots NetKit.
+Pour pouvoir l'utiliser ici, il vous suffira de télécharger l'archive (https://packetstormsecurity.com/sniffers/shijack.tgz), d'en extraire de contenu et de copier le dossier résultant dans */lab/shared*. Ainsi, cet outil pourra être à disposition des hôtes NetKit.
 
-Pour mener à bien cette attaque, on va mettre en place une connexion telnet entre bob et alice : `telnet 10.0.0.1 23`. L'identifiant/mot de passe à utiliser est *guest/guest".
+Pour mener à bien cette attaque, on va mettre en place une connexion telnet entre bob et alice : `telnet 10.0.0.1 23`. L'identifiant/mot de passe à utiliser est *guest/guest*.
 
-Une fois cette connexion établie entre bob et alice, l'objectif de bob va être de réussir à "voler cette session" grâce à l'outil *shijack*.
+Une fois cette connexion établie entre bob et alice, l'objectif d'oscar va être de réussir à "voler cette session" grâce à l'outil *shijack*.
 
-Pour ce faire, il suffira à bob de lancer une simple ligne de commande.
+Pour ce faire, il suffira à oscar de lancer une simple ligne de commande.
 
 **Q.11**  Quelle est cette ligne de commande ? A quoi correspondent les différents paramètres ?
 
 Pour répondre à cette question et mener à bien cette expérimentation, vous pourrez vous basez sur la solution proposée dans https://www.tutorialspoint.com/ethical_hacking/ethical_hacking_tcp_ip_hijacking.htm
 
 
-**Q.12** Quels sont les risques liés à ce genre d'attaques ? Quelles pourraient en être les conséquences
+**Q.12** Quels sont les risques liés à ce genre d'attaques ? Quelles pourraient en être les conséquences ?
 
 #### Man-in-the-Middle avancés
 
@@ -192,7 +191,7 @@ ans,unans=srloop(p,inter=0.2,retry=2,timeout=6)
 
 **Q.20** A quoi servent à votre avis les éléments aléatoires de ce message (id, ttl) ?
 
-Ainsi, avec ces quelques lignes, oscar va envoyer à alice un paquet toutes les 0.2secondes pendant 6 secondes. Il s'agit là d'un exemple simple correspondant à une attaque de type *SYN Flood*. Cette succession rapide de requêtes SYN pourrait entraîner une surcharge du système d'Alice et pourrait donc rendre impossible l'accès aux services d'alice (par exemple un service telnet).
+Ainsi, avec ces quelques lignes, oscar va envoyer à alice un paquet toutes les 0.2 secondes pendant 6 secondes. Il s'agit là d'un exemple simple correspondant à une attaque de type *SYN Flood*. Cette succession rapide de requêtes SYN pourrait entraîner une surcharge du système d'Alice et pourrait donc rendre impossible l'accès aux services d'alice (par exemple un service telnet).
 
 **Q.21** Quels sont les risques de ce genre d'attaques ? Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
 
@@ -209,7 +208,7 @@ Si oscar souhaite mener ce type d'attaque à l'encontre d'alice, avec Scapy, il 
 
 Lancez cette commande et regarder le wireshark de *lana*.
 
-Comme vous pouvez le constater le paquet ICMP, étant fragmenté, peut être envoyé bien que sa taille soit supérieure à la taille maximale définie pour ce type de paquet. Toutefois, le réassemblage de ce paquet pourrait perturber le bon fonctionnement d'alice.
+Comme vous pouvez le constater, le paquet ICMP, étant fragmenté, peut être envoyé, bien que sa taille soit supérieure à la taille maximale définie pour ce type de paquet. Toutefois, le réassemblage de ce paquet pourrait perturber le bon fonctionnement d'alice.
 
 **Q.23** Quels sont les risques de ce genre d'attaques ? Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
 
@@ -249,7 +248,7 @@ Ceci devrait vous permettre de visualiser un résumé complet des paquets ICMP r
 
 #### Attaques de Déni-de-Service avancées
 
-Aujourd'hui, les attaques modernes représentent un danger réel pour les entreprises. En effet, elle pourrait entraîner une perturbation de leur fonctionnement tant en interne qu'en externe. Ces attaques sont capables d'atteindre des débits très élevés de l'ordre de plusieurs millirs de Gb/s. Pour ce faire, ces attaques se basent généralement sur des approches distribuées et sur l'utlisation de réflecteur.
+Aujourd'hui, les attaques DoS modernes représentent un danger réel pour les entreprises. En effet, elles pourraient entraîner une perturbation de leur fonctionnement tant en interne qu'en externe. Ces attaques sont capables d'atteindre des débits très élevés de l'ordre de plusieurs millirs de Gb/s. Pour ce faire, ces attaques se basent généralement sur des approches distribuées et sur l'utlisation de réflecteur.
 
 **Q.26** En prenant l'exemple de l'attaque *Mirai*, expliquez ce que sont ces réflecteurs et comment fonctionnent ces attaques DDoS. Indiquez également quelles sont les contre-mesures qui peuvent être mises en place.
 
@@ -283,22 +282,24 @@ Le programme *exhello.py* permet de modeler le contenu de la pile du programme *
 
 Le programme *exhello.py* permet d'ajouter au début de buf un shellcode. En combinant les commandes *exhello.py*, *hello* et *cat*, faites en sorte qu'il devienne possible d'exécuter une commande shell (n'importe laquelle) à travers le processus hello.
 
+*Note : si vous bloquez sur la définition de cette solution, vous pourrez y revenir en fin de séance.*
+
 **Q.31** Indiquez les contre-mesures qui peuvent être proposées contre ce genre d'attaques.
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées par : https://www.linuxjournal.com/article/6701
 
 #### Telnetd remote exploit
 
-Pour que la prise de contrôle à distance d'une machine soit possible, différentes conditions doivent être réunies. Tout d'abord le service utilisé pour cette prise de contrôle doit disposé de failles exploitables. Ensuite, ce service doit disposé de privilèges élevés. ssh et telnet sont des exemples intéressants de ce type de services (failles + privilèges).
+Pour que la prise de contrôle à distance d'une machine soit possible, différentes conditions doivent être réunies. Tout d'abord le service utilisé pour cette prise de contrôle doit disposé de failles exploitables. Ensuite, ce service doit disposer de privilèges élevés. *ssh* et *telnet* sont des exemples intéressants de ce type de services (failles + privilèges).
 
 Pour ces services, différentes failles ont déjà été rendues publiques. Pour telnet, c'est par exemple le cas de la faille CVE-2011-4862. Ainsi, des exploits permettant d'exploiter cette faille on été publiés à l'image de *telnetd-encrypt_keyid*. Cette faille étant rendu publique, elle n'est bien entendu plus exploitable sur la plupart des systèmes actuels (mises à jour). Toutefois, dans le cadre de cette expérimentation, la machine alice a été configurée pour être vulnérable à ce type d'attaques.
 
-Le code permettant de l'exploiter a été déployée sur oscar et adaptée à ce TP.
+Le code permettant de l'exploiter a été déployé sur oscar et adaptée à ce TP.
 
-Ainsi, sans même connaître le mot de passe du super-utilisateur d'alice, grâce à cette exploit, vous pourrez constater qu'il est possible d'obtenir sur oscar un shell root sur la machine alice : 
+Ainsi, sans même connaître le mot de passe du super-utilisateur d'alice, grâce à cette exploit, vous pourrez constater qu'il est possible d'obtenir pour oscar un shell root sur la machine alice : 
 
 ```console
-./paf 10.0.0.1 23 3
+./paf ip_alice 23 3
 ```
 
 Utilisez Wireshark pour analyser les messages échangés.
@@ -310,7 +311,7 @@ Utilisez Wireshark pour analyser les messages échangés.
 
 ## 3. Etude théorique : Attaques par canaux auxilaires (*Side-channel attack*)
 
-Dans cette partie, au travers d'une étude théorique, nous allons nous intéresser aux attaques pouvant être menées au niveau de l'objet IoT lui même. Plus particulièrement, nous allons nous intéresser aux attaques par canaux auxiliaires. 
+Dans cette partie, au travers d'une étude théorique, nous allons nous intéresser aux attaques pouvant être menées au niveau de l'objet IoT lui même (matérielles). Plus particulièrement, nous allons nous intéresser aux attaques par canaux auxiliaires. 
 
 **Q.34** Qu'est ce qu'une attaque par canaux auxiliaires ? Que cherche-t-on généralement à deviner ? Quelles valeurs peuvent être mesurées ?
 
@@ -320,12 +321,11 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 Une première attaque par canaux auxiliaires possible, parmi les plus simples, est l'attaque nommée *Simple Power Analysis (SPA)*.
 
-Cette attaque consiste à mesurer directement la consommation d'un circuit électrique. L'objectif de cette attaque (ainsi que des autres attaques présentées dans cette partie **4**) est de deviner la clé privée utilisée par un objet IoT.
+Cette attaque consiste à mesurer directement la consommation d'un circuit électrique. L'objectif de cette attaque (ainsi que des autres attaques présentées dans cette partie **3**) est de deviner la clé privée utilisée par un objet IoT.
 
 Pour comprendre le fonctionnement de cette attaque, nous allons nous focaliser ici sur l'algorithme à clé publique RSA (Rivest–Shamir–Adleman), couramment utilisé dans l'environnement IoT.
 
 Avec cet algorithme, la fonction utilisée pour le déchiffrement d'un message est la suivante :
-
 
 **M=C<sup>d</sup> mod(N)**
 
@@ -338,7 +338,7 @@ Or, avec RSA, la méthode la plus efficace pour calculer l'exponentiation d'un e
 _____
 **Objectif, calculer d :**
 
-1) Calcul de T, la décomposition binaire de d
+1) Calculer la décomposition binaire de d
 
 d=d<sub>n</sub>d<sub>n-1</sub>...d<sub>1</sub>d<sub>0</sub><sup>2</sup>
 
@@ -370,7 +370,7 @@ Pour répondre à cette question, vous pourrez utiliser les informations présen
 
 ### 3.B Attaque par injection de fautes 
 
-Une contremesure que vous pourriez avoir introduit dans la partie précédente pourrait consister à introduire une opération factice lorsque le bit est 0 à :
+Une contremesure que vous pourriez avoir introduit dans la partie précédente pourrait consister à introduire une opération factice lorsque le bit est à 0 :
 
 _____
   si d<sub>i</sub>=0:
@@ -405,7 +405,6 @@ Par conséquent, cette attaque par injection de fautes, permet d'attaquer un sys
 Pour répondre à cette question, vous pourrez utiliser les informations présentées au slide 37 dans https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
 
 
-
 ### 3.C Ouverture : Attaque différentielle par analyse de courant (*Differential Power Analysis*)
 
 Alors que les attaques SPA et par injection de fautes font partie des attaques "simples", pouvant être exécutées dans un environnement peu protégé (ce qui correspond à bon nombre d'objets IoT), les attaques DPA font partie d'attaques plus complexes pouvait être exécutées contre des systèmes mieux protégés.
@@ -418,7 +417,7 @@ Par conséquent, l'approche DPA repose également sur une analyse statistique : 
 
 Ainsi, grâce à cette approche, l'attaquant pourra être en mesure (après un certain temps...) d'associer la mesure d'un instant donné à un état (ou une transition) et par conséquent d'en déduire la clé privée de l'objet IoT. 
 
-Cette attaque, basée sur des variations très petites, et non liée à une erreur dans l'implémentation de l'algorithme de chiffrement, est bien plus puissance que les attaques SPA et d'injections de fautes. Toutefois, des contremesures sont possibles.
+Cette attaque, basée sur des variations très petites, et non liée à une erreur dans l'implémentation de l'algorithme de chiffrement, est bien plus puissante que les attaques SPA et d'injections de fautes. Toutefois, des contremesures sont possibles.
 
 **Q.38** Quelles contremesures pourraient être proposées contre ce genre d'attaques ?
 
@@ -436,7 +435,7 @@ Au delà des contremesures actuellement implémentées, de nombreux organismes t
 
 Pour répondre à cette question vous pourrez utiliser les informations présentées par : https://www.itransition.com/blog/blockchain-iot-security 
 
-Pour votre culture personnelle (ou votre divertissement ?) un outil, évoqué dans l'introduction de ce TP, qu'il pourrait vous être utile de connaître est Shodan.
+Pour votre culture personnelle (ou votre divertissement ?) un outil, évoqué dans l'introduction de ce TP, pourrait vous être utile : Shodan.
 
 **Q.41** Qu'est ce que Shodan (https://www.shodan.io/) ? Comment cet outil semble-t-il fonctionner ? Comment pourrait-il être utilisé ? Quels sont les risques ?
 
