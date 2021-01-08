@@ -8,7 +8,7 @@ Le but de ce TP est de vous offrir une petite introduction à la sécurité dans
 
 ## 1. Petit retour sur les objets connectés
 
-La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons.Tout d'abord parce plusieurs centaines de millions d'objets circulent aujourd'hui et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
+La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons. Tout d'abord parce plusieurs centaines de millions d'objets circulent aujourd'hui et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
 - un manque de supervision : peu ou pas de mises à jour de sécurité, peu de moyen de supervisions/détection des attaques, accès physique potentiel à l'objet ;
 - un manque de ressources : peu de ressources à consacrer à la sécurité (difficile déploiement de solutions cryptographiques, absence de sécurité pour les environnements d'exécution), peu de ressources (stockage, calcul, communication) dans l'absolu ;
 - une manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité).
@@ -75,19 +75,23 @@ cd scapy
 
 **Q.** Expliquez ce qu'est Scapy (https://github.com/secdev/scapy) ? Expliquez également quel pourra être l'intérêt de cet outil dans ce contexte.
 
+*Note : Pour pouvoir l'utiliser dans le cadre de ces expérimentations, il faudra le placer dans le dossier /lab/shared*
+
 #### Wireshark
 
 Tout au long des expérimentations, nous allons utiliser Wireshark pour analyser les échanges entre les différentes hôtes et en déduire les conséquences des attaques qui seront menées par oscar.
 
 Depuis un terminal, la commande permettant d'accéder à un des sous réseaux créé par NetKit (*lana*, *lanb*) est : `vdump *nom_ss_reseau* | wireshark -i - -k &`
 
-### 2.B Une première attaque : Empoisonnement des tables ARP
+### 2.B Une première attaque : Man-in-the-Middle
 
 Il s'agit là d'une première attaque réseau envisageable. Les attaques réseau sont une première grande catégorie d'attaques qui peuvent être menées contre les objets IoT.
 
 **Q.** Ces attaques se décomposent généralement en 4 à 5 grandes étapes, lesquelles ?
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://blog.f-secure.com/fr/les-5-phases-dune-cyber-attaque-le-point-de-vue-du-pirate/
+
+#### Empoisonnement des tables ARP
 
 **Q.** Rappelez quelle est l'utilité d'une table ARP et à quoi correspondent les ARP Query and Reply. Indiquez également quel pourrait être l'intérêt de s'attaquer à ces tables ARP (*ARP Spoofing/ARP Poisoning*).
 
@@ -115,6 +119,40 @@ Vous pourrez également vous inspirer de la solution proposée par https://mediu
 **Q.** Quelles contre-mesures peuvent être envisagées pour lutter contre ce genre d'attaques ? 
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://en.wikipedia.org/wiki/ARP_spoofing#Defenses
+
+
+#### TCP Hijacking
+
+**Q.** Qu'est ce que ce type d'attaque ? Quel en est le principe ?
+
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans  https://www.techrepublic.com/article/tcp-hijacking/
+
+Pour mener simplement et rapidement ce genre d'attaque, nous allons utiliser un outil développé pour cet usage : *shijack*.
+
+Pour pouvoir l'utiliser ici, il vous suffira de télécharger l'archive (https://packetstormsecurity.com/sniffers/shijack.tgz), d'en extraire de contenu et de copier le dossier résultant dans */lab/shared*. Ainsi, cet outil pourra être à disposition des hots NetKit.
+
+Pour mener à bien cette attaque, on va mettre en place une connexion telnet entre bob et alice : `telnet 10.0.0.1 23`. L'identifiant/mot de passe à utiliser est *guest/guest".
+
+Une fois cette connexion établie entre bob et alice, l'objectif de bob va être de réussir à "voler cette session" grâce à l'outil *shijack*.
+
+Pour ce faire, il suffira à bob de lancer une simple ligne de commande.
+
+**Q.**  Quelle est cette ligne de commande ? A quoi correspondent les différents paramètres ?
+
+Pour répondre à cette question et mener à bien cette expérimentation, vous pourrez vous basez sur la solution proposée dans https://www.tutorialspoint.com/ethical_hacking/ethical_hacking_tcp_ip_hijacking.htm
+
+
+**Q.** Quels sont les risques liés à ce genre d'attaques ? Quelles pourraient en être les conséquences
+
+#### Man-in-the-Middle avancés
+
+Les attaques de type Man-in-the-Middle sont parmi les principales attaques pouvant être menées, notamment en raison du faible niveau de sécurisation des objets connectés. L'empoisonnement de tables ARP et le vol de session sont quelques exemples de ces attaques. Comme le montre cet article (https://gizmodo.com/why-apples-huge-security-flaw-is-so-scary-1529041062) de nombreuses grandes entreprises, telles qu'Apple, peuvent s'avérer vulnérables à ce type d'attaques.
+
+**Q.** Quels sont les principaux types d'attaques MITM et les principales techniques utilisées ?
+
+**Q.** De manière générale, quelles contremesures peuvent être envisagées contre ce type d'attaques ?
+
+Pour répondre à ces deux questions, vous pourrez utiliser les informations présentées dans https://www.rapid7.com/fundamentals/man-in-the-middle-attacks/
 
 ### 2.B Une seconde attaque : Déni-de-Service 
 
@@ -217,17 +255,7 @@ Aujourd'hui, les attaques modernes représentent un danger réel pour les entrep
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://www.imperva.com/blog/how-to-identify-a-mirai-style-ddos-attack/
 
-### 2.C Une troisième attaque : Vol de session
-
-Un troisième type d'attaque possible sont les attaques dites de vol de session.
-
-#### TCP Hijacking
-
-**Q.**
-
-#### Man-in-the-Middle
-
-### 2.D Une quatrième attaque : Prise de contrôle
+### 2.D Une troisème attaque : Prise de contrôle
 
 Un autre type d'attaques peut avoir pour objectif de prendre le contrôle d'une machine locale/distance.
 
