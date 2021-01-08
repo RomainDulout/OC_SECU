@@ -6,6 +6,8 @@ Le but de ce TP est de vous offrir une petite introduction à la sécurité dans
 
 **Note : A condition que vous ayez installé/que vous installiez VirtualBox sur votre machine personnelle, il est tout à fait possible de réaliser ce TP sans se servir des machines de l'école.**
 
+**Note** : sur les machines de l'école pensez à entrer la commande `mount mondzouk-server3:/mendia/images/Archives/Debian8-mirror /media/mirror`
+
 ## 1. Petit retour sur les objets connectés
 
 La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons. Tout d'abord parce plusieurs centaines de millions d'objets sont en circulation et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
