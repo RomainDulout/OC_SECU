@@ -48,7 +48,7 @@ Pour réaliser l'installation de cet outil sur votre machine, il vous faudra ré
 
 Une fois les étapes réalisées, grâce au fichier `./check_configuration.sh`, vérifiez que l'installation a correctement été réalisée
 
-Il est à noter que si vous souhaitez réaliser ce TP directement sur votre machine personnelle (et non les ordinateurs de l'école), vous pouvez le faire en utilisant une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://celene.univ-orleans.fr/mod/url/view.php?id=277542), vous pourrez récupérer cette machine virtuelle.
+Il est à noter que si vous souhaitez réaliser ce TP directement sur votre machine personnelle (et non les ordinateurs de l'école), vous pouvez le faire en utilisant une machine virtuelle contenant l'ensemble des installations nécessaires. A l'adresse suivante (https://drive.google.com/file/d/1b0oJ5-UMHXhtMqb2tG4vxp8t0dC2ZUqN/view?usp=sharing), vous pourrez récupérer cette machine virtuelle.
 
 **Q.3** Expliquez ce qu'est NetKit. Expliquez également quel pourra être l'intérêt de cet outil dans le cadre de ce TP.
 
