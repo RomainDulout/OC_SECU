@@ -119,9 +119,11 @@ Pour créer la ligne permettant cette redirection, vous pourrez utiliser différ
 
 Vous pourrez également vous inspirer de la solution proposée par https://medium.com/datadriveninvestor/arp-cache-poisoning-using-scapy-d6711ecbe112 
 
+*Note :* Attention, contrairement à la solution utilisée ci-dessus, la façon la plus simple de faire sera ici d'utiliser une opération du type `who-has`, oscar se faisant passer pour la passerelle.
+
 **Q.7** Indiquez la ligne de commande que vous avez utilisée pour empoisonner la table ARP d'alice. Indiquez également quels sont les mots clés permettant d'indiquer le nombre de message que l'on souhaite envoyer ainsi que la fréquence.
 
- À l'aide de Wireshark, vous pouvez vérifier que l'empoisonnement de la table ARP a bien fonctionné. Pour ce faire, observez le trafic avec et sans empoisonnement de la table ARP lorsque alice se connecte au service UDP echo de bob (`nc -u bob echo`). 
+A l'aide d'un simple `ping` d'alice vers bob, vous pourrez vérifier que l'empoisonnement de la table ARP a bien fonctionné. 
 
 **Q.8** Quelles différences observez vous (avec/sans empoisonnement) ? A quoi correspond cette redirection ?
 
