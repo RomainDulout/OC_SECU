@@ -6,7 +6,7 @@ Le but de ce TP est de vous offrir une petite introduction à la sécurité dans
 
 **Note : A condition que vous ayez installé/que vous installiez VirtualBox sur votre machine personnelle, il est tout à fait possible de réaliser ce TP sans se servir des machines de l'école.**
 
-**Note** : sur les machines de l'école pensez à entrer la commande `mount mondzouk-server3:/media/images/Archives/Debian8-mirror /media/mirror`
+**Note** : sur les machines de l'école pensez à entrer la commande `mount mondzouk-server3:/media/images/Archives/Debian8-mirror /media/mirror`. Sur ces machines, la commande Make n'est pas nécessairement installée...
 
 ## 1. Petit retour sur les objets connectés
 
