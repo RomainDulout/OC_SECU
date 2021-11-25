@@ -123,7 +123,9 @@ Vous pourrez également vous inspirer de la solution proposée par https://mediu
 
 *Note :* Attention, contrairement à la solution utilisée ci-dessus, la façon la plus simple de faire sera ici d'utiliser une opération du type `who-has`, oscar se faisant passer pour la passerelle.
 
-**Q.7** Indiquez la ligne de commande que vous avez utilisée pour empoisonner la table ARP d'alice. Indiquez également quels sont les mots clés permettant d'indiquer le nombre de message que l'on souhaite envoyer ainsi que la fréquence.
+*Note :* La solution la plus efficace à mettre en place pourrait être que oscar envoie une requête de type who-has à alice en indiquant comme adresse IP d'émetteur l'adresse IP de la passerelle d'Alice et non la sienne (ie qu'Alice associe l'adresse MAC d'oscar à l'IP de la passerelle)
+
+**Q.7** Indiquez la ligne (ou les lignes) de commande que vous avez utilisée pour empoisonner la table ARP d'alice. Indiquez également quels sont les mots clés permettant d'indiquer le nombre de message que l'on souhaite envoyer ainsi que la fréquence.
 
 A l'aide d'un simple `ping` d'alice vers bob, vous pourrez vérifier que l'empoisonnement de la table ARP a bien fonctionné. 
 
