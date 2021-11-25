@@ -93,6 +93,8 @@ Utilisez https://www.lri.fr/~fmartignon/documenti/reseauxavances/Netkit_enonce_d
 
 *Note : Si vous utilisez la VM, vous pourrez simplement utiliser la commande suivante :* `vdump *nom_ss_reseau* | wireshark -i - -k &`
 
+*Note: dans les faits, **vous n'avez pas réellement besoin d'utiliser Wireshark**, une simple utilisation de la commande ping (et une analyse des données renvoyées) pourrait tout à fait être suffisante. Il est simplement intéressant d'utiliser Wireshark pour une prise en main plus complète.*
+
 ### 2.B Une première attaque : Man-in-the-Middle
 
 Il s'agit là d'une première attaque réseau envisageable. Les attaques réseau sont une première grande catégorie d'attaques qui peuvent être menées contre les objets IoT.
