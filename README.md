@@ -52,6 +52,8 @@ Il est à noter que si vous souhaitez réaliser ce TP directement sur votre mach
 
 **Q.3** Expliquez ce qu'est NetKit. Expliquez également quel pourra être l'intérêt de cet outil dans le cadre de ce TP.
 
+*Note : Procédure d'install pour NetKit : https://github.com/wojsamjan/netkit*
+
 #### Lab d'expérimentation
 
 Au delà de cet outil, nous allons également avoir besoin du lab Netkit contenant l'ensemble des fichiers nécessaires à la réalisation de ce TP (ie l'environnement de simulation utilisé). Il s'agit du dossier compressé *lab.tar.gz* accessible à la racine de ce repo GitHub.
