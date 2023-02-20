@@ -457,5 +457,5 @@ Pour votre culture personnelle (ou votre divertissement ?) un outil, évoqué da
 
 **Q.41** Qu'est ce que Shodan (https://www.shodan.io/) ? Comment cet outil semble-t-il fonctionner ? Comment pourrait-il être utilisé ? Quels sont les risques ?
 
-D'autres outils qui pourraient vous intéresser : matasploit, Kali Lunix
+D'autres outils qui pourraient vous intéresser : Metasploit, Kali Linux
 
