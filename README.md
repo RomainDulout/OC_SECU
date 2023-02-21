@@ -382,7 +382,7 @@ ____
 
 **Q.35** Si vous étiez un attaquant, en considérant l'algorithme ci-dessus, comment pourriez vous être en capacité de deviner la clé de l'objet IoT ?
 
-Pour répondre à cette question, vous pourrez utiliser les informations présentées aux slides 25 et 26 dans https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans : https://docs.google.com/presentation/d/1oDPkvdy-NmP3_QjOjONSJRikCFUHAeI5vn8LLvKnRG0/edit?usp=sharing
 
 **Q.36** Pour éviter ce problème et offrir une solution "à consommation constante", que le bit traité soit un 0 ou un 1, quelle contremesure pourriez vous proposer ?
 
@@ -420,7 +420,7 @@ Par conséquent, cette attaque par injection de fautes, permet d'attaquer un sys
 
 **Q.37** Quelle contremesure pourrait être proposée pour résoudre ce problème ?
 
-Pour répondre à cette question, vous pourrez utiliser les informations présentées au slide 37 dans https://www.emse.fr/~nadia.el-mrabet/Presentation/Cours5_SCA.pdf
+Pour répondre à cette question, vous pourrez utiliser les informations présentées dans : https://docs.google.com/presentation/d/1oDPkvdy-NmP3_QjOjONSJRikCFUHAeI5vn8LLvKnRG0/edit?usp=sharing
 
 
 ### 3.C Ouverture : Attaque différentielle par analyse de courant (*Differential Power Analysis*)
