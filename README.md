@@ -2,7 +2,7 @@
 
 Le but de ce TP est de vous offrir une petite introduction à la sécurité dans l'environnement IoT.
 
-**Note : A la fin de la scéance, pensez à m'envoyer un compte-rendu (court) répondant aux différentes questions présentes dans ce TP (leo.mendiboure@univ-eiffel.fr)**
+**Note : A la fin de la scéance, pensez à m'envoyer un compte-rendu (court) répondant aux différentes questions présentes dans ce TP (romain.dulout@univ-eiffel.fr)**
 
 **Note : A condition que vous ayez installé/que vous installiez VirtualBox sur votre machine personnelle, il est tout à fait possible de réaliser ce TP sans se servir des machines de l'école.**
 
@@ -13,7 +13,7 @@ Le but de ce TP est de vous offrir une petite introduction à la sécurité dans
 La sécurité des objets connectés apparait aujourd'hui comme un élément essentiel et ceci pour différentes raisons. Tout d'abord parce plusieurs centaines de millions d'objets sont en circulation et que ce nombre ne cesse d'augmenter. Il s'agit par conséquent d'un vecteur d'attaque important. Ensuite, parce que ces objets rencontrent différents problèmes de sécurité :
 - un manque de supervision : peu ou pas de mises à jour de sécurité, peu de moyen de supervisions/détection des attaques, accès physique potentiel à l'objet ;
 - un manque de ressources : peu de ressources à consacrer à la sécurité (difficile déploiement de solutions cryptographiques, absence de sécurité pour les environnements d'exécution), peu de ressources (stockage, calcul, communication) dans l'absolu ;
-- une manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité).
+- un manque d'homogénéité : hétérogénéité architecturale (tant matérielle que logicielle), hétérogénéité des protocoles (tant en terme de communication que de sécurité).
 
 Bien que ces objets connectés soient généralements associés à des gadgets dans l'imaginaire collectif, comme l'on montré différentes attaques passées ou actuelles (Jeep hack, Nest hack, Vtech hack, Mirai), la vulnérabilité de ces objets entraine des risques importants :
 - attaques destructrices : ces attaques, potentiellement à grande échelle (Shodan), peuvent entraîner, par exemple, la déstabilisation de grands groupes industriels voire d'états (concurrents/ennemis ?) ;
@@ -171,7 +171,7 @@ Les attaques de type Man-in-the-Middle sont parmi les principales attaques pouva
 
 Pour répondre à ces deux questions, vous pourrez utiliser les informations présentées dans https://www.rapid7.com/fundamentals/man-in-the-middle-attacks/
 
-### 2.B Une seconde attaque : Déni-de-Service 
+### 2.C Une seconde attaque : Déni-de-Service 
 
 **Q.15** Qu'est ce qu'une attaque de Déni-de-Service ? Quel est son objectif ? 
 
@@ -272,9 +272,9 @@ Aujourd'hui, les attaques DoS modernes représentent un danger réel pour les en
 
 Pour répondre à cette question, vous pourrez utiliser les informations présentées dans https://www.imperva.com/blog/how-to-identify-a-mirai-style-ddos-attack/
 
-### 2.C Une troisème attaque : Prise de contrôle
+### 2.D Une troisème attaque : Prise de contrôle
 
-Un autre type d'attaques peut avoir pour objectif de prendre le contrôle d'une machine locale/distance.
+Un autre type d'attaques peut avoir pour objectif de prendre le contrôle d'une machine locale/distancte.
 
 #### Prise de contrôle par dépassement de tampon
 
